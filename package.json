@@ -1,0 +1,33 @@
+{
+  "name": "cs546-final-project",
+  "version": "0.0.1",
+  "description": "A Movie/TV review site",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaberIV/cs546-Final-Project.git"
+  },
+  "authors": [
+    "Edward McFarlin <emcfarli@stevens.edu>",
+    "Matt Swentzel",
+    "John Hrabar",
+    "Justin Zauderer"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TaberIV/cs546-Final-Project/issues"
+  },
+  "homepage": "https://github.com/TaberIV/cs546-Final-Project#readme",
+  "dependencies": {
+    "bcrypt": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongodb": "^3.0.6",
+    "uuid": "^3.2.1"
+  }
+}
