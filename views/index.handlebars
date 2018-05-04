@@ -1,67 +1,55 @@
-{{#if error}}
-<div id="login-error" class="error">
-  <h3>Error:</h3>
-  {{ error }}
-</div>
-{{/if}}
+<table class="homepage">
+    <tr>
+      <td>
+        <article>
+          <h2>In Theaters:</h2>
+          <table class="movies">
+            <tr>
+              {{#each inTheaters}}
+                <td><a href={{this.link}}>{{this.Title}}</a></td>
+              {{else}}
+                <td>There's nothing in theaters</td>
+              {{/each}}
+            </tr>
+            <tr>
+              {{#each inTheaters}}
+                <td><a href={{this.link}}<img src={{this.img}}></a></td>
+              {{/each}}
+            </tr>
+            <tr>
+              {{#each inTheaters}}
+                <td>{{this.releaseDate}}</td>
+              {{/each}}
+            </tr>
+          </table>
+        </article>
+      </td>
+    </tr>
 
-<div class="content">
-  <!--The In Theaters Table -->
-  <table class="inTheaters" style="float: left", border="1">
-    <caption>In Theaters</caption>
-    <tr> 
-      <th>Testing </th>
+    <tr>
+      <td>
+        <article>
+          <h2>Trending:</h2>
+          <table class="movies">
+            <tr>
+              {{#each trending}}
+                <td><a href={{this.link}}>{{this.Title}}</a></td>
+              {{else}}
+                <td>Nothing is trending.</td>
+              {{/each}}
+            </tr>
+            <tr>
+              {{#each trending}}
+                <td><a href={{this.link}}<img src={{this.img}}></a></td>
+              {{/each}}
+            </tr>
+            <tr>
+              {{#each trending}}
+                <td>{{this.releaseDate}}</td>
+              {{/each}}
+            </tr>
+          </table>
+        </article>
+      </td>
     </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>{{{movie}}} </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>{{{movie}}} </th>
-    </tr><tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>{{{movie}}} </th>
-    </tr>
-  </table>
-
-  <!--The Most Popular Table -->
-
-  <table class="mostPopular" style="float: left" border="1">
-    <caption>Most Popular</caption>
-    <tr> 
-      <th>Testing Again </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>Testing </th>
-    </tr>
-    <tr> 
-      <th>{{{movie}}} </th>
-    </tr>
-  </table>
-
-<div>
+</table>

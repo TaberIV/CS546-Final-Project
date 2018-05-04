@@ -68,26 +68,18 @@ caption {
 	display:block;
 }
 
-
-.inTheaters {
-	background-color: #E0E0E0; 
-	margin: 10px;
-	max-width: 35%;
-	min-width: 35%;
-	text-align: left; 
-	overflow-y:scroll;
-  	 height:150px;
-   	display:block;
+table.homepage: {
+	background-color: #E0E0E0;
+	max-width: 100%
 }
 
-.mostPopular {
-	background-color: #E0E0E0; 
+table.movies {
+	background-color: #E0E0E0;
 	margin: 10px;
-	max-width: 35%;
-	min-width: 35%;
+	width: 100%;
 	text-align: left; 
-	overflow-y:scroll;
-  	 height:150px;
+	overflow-x: scroll;
+  	height:150px;
    	display:block;
 }
 

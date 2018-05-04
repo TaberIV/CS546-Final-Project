@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userData = require("../data/users");
+const movieData = require("../data/movies")
 
 router.get("/", async (req, res) => {
 	var authenticated;
@@ -13,7 +14,10 @@ router.get("/", async (req, res) => {
 	if (authenticated)
 		res.redirect('/private');
 	else {
-		var data = { title: "Home" };
+		var numMovies = 10;
+		var data = {
+			inTheaters: movieData.getInTheaters(numMovies)
+		};
 		res.render('index', data);
 	}
 });
