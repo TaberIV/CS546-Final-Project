@@ -16,7 +16,8 @@ router.get("/", async (req, res) => {
 	else {
 		var numMovies = 10;
 		var data = {
-			inTheaters: movieData.getInTheaters(numMovies)
+			inTheaters: await movieData.getInTheaters(numMovies),
+			trending: await movieData.getInTheaters(numMovies)
 		};
 		res.render('index', data);
 	}

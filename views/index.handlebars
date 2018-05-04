@@ -6,7 +6,7 @@
           <table class="movies">
             <tr>
               {{#each inTheaters}}
-                <td><a href={{this.link}}>{{this.Title}}</a></td>
+                <td><a href={{this.link}}>{{this.title}}</a></td>
               {{else}}
                 <td>There's nothing in theaters</td>
               {{/each}}
@@ -33,7 +33,7 @@
           <table class="movies">
             <tr>
               {{#each trending}}
-                <td><a href={{this.link}}>{{this.Title}}</a></td>
+                <td><a href={{this.link}}>{{this.title}}</a></td>
               {{else}}
                 <td>Nothing is trending.</td>
               {{/each}}
