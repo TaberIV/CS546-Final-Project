@@ -38,7 +38,7 @@ async function getAllUsers() {
 
 async function getUserByUsername(username) {
 	if (!username ||typeof username != 'string')
-		throw "username must be a non-empty string"
+		throw "username must be a non-empty string";
 
 	// Replace with mongo things
 	for (var i = 0; i < users.length; i++) {
