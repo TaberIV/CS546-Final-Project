@@ -3,6 +3,11 @@ const router = express.Router();
 const userData = require("../data/users");
 const uuid = require('uuid/v4');
 
+router.get("/", async (req, res) => {
+	var data = { title: "Login" };
+	res.render("login", data);
+});
+
 router.post("/", async (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -23,12 +28,11 @@ router.post("/", async (req, res) => {
 
 		res.redirect("/private");
 	} else {
-		// Todo Add error message
 		var data = {
 			title: "Home",
 			error: error_message
 		}
-		res.render("index", data);
+		res.render("login", data);
 	}
 });
 
