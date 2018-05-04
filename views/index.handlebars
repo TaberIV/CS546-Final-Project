@@ -1,28 +1,67 @@
-<article>
-  <header>
-    <h2>Login</h2>
-  </header>
+{{#if error}}
+<div id="login-error" class="error">
+  <h3>Error:</h3>
+  {{ error }}
+</div>
+{{/if}}
 
-  {{#if error}}
-  <div id="login-error" class="error">
-    <h3>Error:</h3>
-    {{ error }}
-  </div>
-  {{/if}}
+<div class="content">
+  <!--The In Theaters Table -->
+  <table class="inTheaters" style="float: left", border="1">
+    <caption>In Theaters</caption>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>{{{movie}}} </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>{{{movie}}} </th>
+    </tr><tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>{{{movie}}} </th>
+    </tr>
+  </table>
 
-  <form id="login-form" action="/login" method="post">
-    <table class="login">
-      <tr>
-        <td><label for="username">Username:</label></td>
-        <td><input type="text" name="username" id="username"></td>
-        <td></td>
-      </tr>
+  <!--The Most Popular Table -->
 
-      <tr>
-        <td><label for="password">Password:</label></td>
-        <td><input type="password" name="password" id="password"></td>
-        <td><input type="submit" value="Submit"></td>
-      </tr>
-    </table>
-  </form>
-</article>
+  <table class="mostPopular" style="float: left" border="1">
+    <caption>Most Popular</caption>
+    <tr> 
+      <th>Testing Again </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>Testing </th>
+    </tr>
+    <tr> 
+      <th>{{{movie}}} </th>
+    </tr>
+  </table>
+
+<div>
