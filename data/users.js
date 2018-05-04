@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-// Replace with mongo things
+
 // const users = [
 // 	{
 // 		username: "masterdetective123",
@@ -63,6 +63,11 @@ async function checkCredentials(username, password) {
 		return true;
 	else
 		return false;
+}
+
+//Gets all of the ratings that have been submitted by the user.
+async function getUserRatings(username){
+	//MongoDB stuff
 }
 
 async function getUserBySessionID(sID) {
