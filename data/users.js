@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Replace with mongo things
 const users = [
@@ -31,11 +32,6 @@ const users = [
 	}	
 ];
 
-async function getAllUsers() {
-	// Insert mongo things
-	// return users;
-}
-
 async function getUserByUsername(username) {
 	if (!username ||typeof username != 'string')
 		throw "username must be a non-empty string";
@@ -51,7 +47,7 @@ async function getUserByUsername(username) {
 
 async function checkCredentials(username, password) {
 	if (!username || typeof username != 'string' || !password || typeof password != 'string')
-		throw "username and password must be non-empty strings"
+		throw "username and password must be non-empty strings";
 
 	try {
 		var user = await getUserByUsername(username);
@@ -63,6 +59,30 @@ async function checkCredentials(username, password) {
 		return true;
 	else
 		return false;
+}
+
+async function createUser(username, password) {
+	if (!username || typeof username != 'string' || !password || typeof password != 'string')
+		throw "username and password must be non-empty strings";
+
+	if (await getUserByUsername(username) != undefined)
+		return false;
+
+	var hashedpassword = await bcrypt.hash(password, saltRounds);
+
+	var newUser = {
+		username: username,
+		firstname: "New",
+		lastname: "Guy",
+		profession: "N00b",
+		bio: "Just joined!",
+		hashedpassword: hashedpassword,
+		sessionIDs: []
+	};
+
+	users.push(newUser);
+
+	return true;
 }
 
 //Gets all of the ratings that have been submitted by the user.
@@ -105,5 +125,6 @@ module.exports = {
 	checkCredentials,
 	getUserBySessionID,
 	addUserSessionID,
-	expireSessionID
+	expireSessionID,
+	createUser
 };

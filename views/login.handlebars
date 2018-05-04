@@ -1,12 +1,11 @@
-<article>
-
-  {{#if error}}
-  <div id="login-error" class="error">
-    <h3>Error:</h3>
-    {{ error }}
-  </div>
-  {{/if}}
+{{#if error}}
+<div id="login-error" class="error">
+  <h3>Error:</h3>
+  {{ error }}
+</div>
+{{/if}}
   
+<article>  
   <header>
     <h2>Login</h2>
   </header>
@@ -25,9 +24,14 @@
         <td><input type="submit" value="Log In"></td>
       </tr>
     </table>
-
   </form>
-  <h3> Not already a member? Sign Up. </h3>
+</article>
+
+<article>
+  <header>
+    <h2>Not already a member? Sign Up.</h2>
+  </header>
+  
   <form id="signUp-form" action="/signup" method="post">
     <table class="login">
       <tr>
