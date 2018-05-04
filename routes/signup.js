@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
 	try {
 		userCreated = await userData.createUser(username, password);
 	} catch (e) {
+		console.log(e);
 		error_message = "Empty username/password."
 	}
 
@@ -35,6 +36,8 @@ router.post("/", async (req, res) => {
 		}
 		res.render("login", data);
 	}
+
+	return true;
 });
 
 module.exports = router;
