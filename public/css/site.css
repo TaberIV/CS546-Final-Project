@@ -80,6 +80,12 @@ table.movies img {
 	height: 250px;
 }
 
+table.movies p {
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+
 /* Login Error Box */
 .login-error {
 	border-radius: 25px;
@@ -110,7 +116,6 @@ footer {
 	bottom: 0;
 	left: 0;
 	right: 0;
-
 }
 
 footer p {
