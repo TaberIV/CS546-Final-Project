@@ -1,4 +1,7 @@
 const mongodb = require("mongodb");
+const mongoCollections = require("../config/mongoCollections");
+const movies = mongoCollections.movies;
+const uuid = require("uuid");
 
 const movieArray = [
 	{
@@ -40,6 +43,45 @@ const movieArray = [
 		poster: "images/WarriorsPoster.jpg"
 	}
 ]
+
+/*
+Adds a new movie to the database.
+Will be called using a form.
+*/
+async function addMovie(title, inTheaters, cast, description, genres, poster){
+	try{
+		if(!title || title.trim() == ""){
+			throw "Must provide a movie title";
+		}
+		else if(!cast || cast.trim() == ""){
+			throw "Must provide cast";
+		}
+		else if(!description || description.trim() == ""){
+			throw "Must provide a description";
+		}
+		else if(!genres || genres.trim() == ""){
+			throw "Must provide genres";
+		}
+		else if(!poster || poster.trim() == ""){
+			throw "Must provide a poster";
+		}
+
+		let newMovie = {
+			_id :  uuid.v4(),
+			title: title,
+			inTheaters: inTheaters,
+			cast: cast,
+			description: description,
+			genres: genres,
+			poster: poster
+		};
+
+		let movieCollection = await movies();
+		return await movieCollection.insertOne(newMovie);
+	} catch (e){
+		throw e;
+	}
+}
 
 //Gets the movie by its given ID
 async function getMovieByID(_id) {
