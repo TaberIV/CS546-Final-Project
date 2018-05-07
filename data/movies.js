@@ -84,30 +84,25 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 
 //Gets the movie by its given ID
 async function getMovieByID(_id) {
-	// Mongo things
-	if(_id == null || typeof _id !== "string"){
-		throw "_id must be a non-empty string";
-	}
-	for(var i = 0; i < movieArray.length;i++){
-		if(_id == movieArray[i]._id){
-			return movieArray[i];
+	try{
+		if(_id == null || typeof _id !== "string"){
+			throw "_id must be a non-empty string";
 		}
+		let movieCollection = await movies();
+		return await movieCollection.findOne({_id:id});
+	} catch (e){
+		throw e;
 	}
-	return undefined;
 }
 
 //Gets all the movies that are currently in theaters
 async function getInTheaters() {
-	var moviesInTheaters = [];
-	for(var i = 0; i < movieArray.length;i++){
-		if(movieArray[i].inTheaters === true){
-			moviesInTheaters.push(movieArray[i]);
-		}
+	try{
+		let movieCollection = await movies();
+		return await movieCollection.find({inTheaters: true});
+	} catch(e){
+		throw e;
 	}
-	// Mongo things
-
-	// TEMP
-	return moviesInTheaters;
 }
 
 
@@ -135,6 +130,7 @@ async function getTopMovies(numMovies){
 }
 
 module.exports = {
+	addMovie,
 	getMovieByID,
 	getInTheaters,
 	getTopMovies
