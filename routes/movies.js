@@ -5,11 +5,14 @@ const movieData = require("../data/movies")
 
 router.get("/:id", async (req, res) => {
 	try{
-		let movie = getMovieByID(req.params.id);
-		res.render("movie", movie);
+		let id = req.params.id;
+		let movie = await movieData.getMovieByID(id);
+
+		res.render("movie", { movie });
 	}
 	catch (e) {
-		var errorNUm = 404;
+		console.log(e);
+		var errorNum = 404;
 		var data = {
 			errorNum: errorNum,
 			description: "the movie is not in the database"

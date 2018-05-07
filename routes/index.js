@@ -13,6 +13,7 @@ function constructorMethod(app) {
 	app.use("/signup", signUpRoute);
 	app.use("/private", privateRoute);
 	app.use("/logout", logoutRoute);
+	app.use("/movies", moviesRoute);
 
 	app.use("*", async (req, res) => {
 		var user;
