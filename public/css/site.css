@@ -1,6 +1,6 @@
 html{
-  position:relative; 
-  min-height: 100%;
+	position:relative; 
+	min-height: 100%;
 }
 
 body {
@@ -37,16 +37,32 @@ form {
 	font-size: 14pt;
 }
 
+a.title:link {
+	color: red;
+}
+
+a.title:visited {
+	color: red;
+}
+
+a.title:hover {
+	color: pink;
+}
+
+a.title:active {
+	color: purple;
+}
+
 .error {
 	border-radius: 25px;
 	border: 2px solid #e03a3a;
-    background: #F44542;
-    padding: 15px; 
-    width: max-content;
-    height: max-content;
-    margin: 15px;
+	background: #F44542;
+	padding: 15px; 
+	width: max-content;
+	height: max-content;
+	margin: 15px;
 
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .error h3 {
@@ -93,8 +109,8 @@ footer {
 	margin-top: 15px;
 	position: absolute;
 	bottom: 0;
-    left: 0;
-    right: 0;
+	left: 0;
+	right: 0;
 
 }
 
