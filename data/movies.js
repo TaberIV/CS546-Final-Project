@@ -4,7 +4,7 @@ const movieArray = [
 	{
 		_id: "12asdf3fasdf",
 		title: "Jurassic Park",
-		inTheaters: "false",
+		inTheaters: true,
 		reviews: [
 		'jhbugvyghjn'
 		],
@@ -16,12 +16,14 @@ const movieArray = [
 		genres: [
 			"adventure",
 			"monster"
-		]
+		],
+		link: "images/JurassicParkPoster.jpeg",
+		img: ""
 	},
 	{
 		_id: "quedv2eufyv",
 		title: "Warriors",
-		inTheaters: "true",
+		inTheaters: true,
 		reviews: [
 		'weijbdweiubfe'
 		],
@@ -33,7 +35,8 @@ const movieArray = [
 		genres: [
 			"adventure",
 			"monster"
-		]
+		],
+		link: "movies/Warriors"
 	}
 ]
 
