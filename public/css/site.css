@@ -71,9 +71,12 @@ table.movies {
 	background-color: #E0E0E0;
 	margin: 10px;
 	width: 100%;
-	text-align: left; 
 	overflow-x: scroll;
    	display:block;
+}
+
+table.movies td {
+	padding-left: 10px;
 }
 
 table.movies img {
@@ -81,9 +84,10 @@ table.movies img {
 }
 
 table.movies p {
-     white-space: nowrap;
-     overflow: hidden;
-     text-overflow: ellipsis;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Login Error Box */
