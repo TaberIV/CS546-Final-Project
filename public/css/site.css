@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 5px;
 }
 
-/* Main title */
+/* Titles */
 a.title:link {
 	color: red;
 }
@@ -76,6 +76,10 @@ table.movies {
    	display:block;
 }
 
+table.movies img {
+	height: 250px;
+}
+
 /* Login Error Box */
 .login-error {
 	border-radius: 25px;
@@ -103,7 +107,6 @@ footer {
 	background-color: #F0F0F0;
 	padding: 5px;
 	margin-top: 15px;
-	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
