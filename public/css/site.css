@@ -1,3 +1,4 @@
+/* Document formatting */
 html{
 	position:relative; 
 	min-height: 100%;
@@ -11,6 +12,7 @@ body {
 	margin-right: auto;
 }
 
+/* Header */
 header table {
 	padding: 5px;
 	background-color: #FFE57F;
@@ -19,24 +21,21 @@ header table {
 	width: 100%;
 }
 
+.align-out td:nth-child(odd) {
+	text-align: left;
+}
+
+.align-out td:nth-child(even) {
+	text-align: right;
+}
+
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
 	color: #333;
 	margin-bottom: 5px;
 }
 
-h1 {
-	font-size: 24pt;
-}
-
-p {
-	font-size: 12pt;
-	line-height: 1.5;
-}
-
-form {
-	font-size: 14pt;
-}
-
+/* Main title */
 a.title:link {
 	color: red;
 }
@@ -53,40 +52,19 @@ a.title:active {
 	color: purple;
 }
 
-.error {
-	border-radius: 25px;
-	border: 2px solid #e03a3a;
-	background: #F44542;
-	padding: 15px; 
-	width: max-content;
-	height: max-content;
-	margin: 15px;
-
-	vertical-align: middle;
+/* Body formatting */
+p {
+	font-size: 12pt;
+	line-height: 1.5;
 }
 
-.error h3 {
-	color: black;
-	margin: 0;
+form {
+	font-size: 14pt;
 }
 
-.error text {
-	color: black;
-}
-
-ul {
-	list-style-type: circle;
-}
-
-caption {
-	text-align: center;
-	background: none;
-	display:block;
-}
-
-table.homepage: {
-	background-color: #E0E0E0;
-	max-width: 100%
+/* Homepage */
+table.homepage {
+	min-width: 100%
 }
 
 table.movies {
@@ -99,10 +77,29 @@ table.movies {
    	display:block;
 }
 
-a.account {
-	float: right;
+/* Login Error Box */
+.login-error {
+	border-radius: 25px;
+	border: 2px solid #e03a3a;
+	background: #F44542;
+	padding: 15px; 
+	width: max-content;
+	height: max-content;
+	margin: 15px;
+
+	vertical-align: middle;
 }
 
+.login-error h3 {
+	color: black;
+	margin: 0;
+}
+
+.login-error text {
+	color: black;
+}
+
+/* Footer */
 footer {
 	background-color: #F0F0F0;
 	padding: 5px;

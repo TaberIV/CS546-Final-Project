@@ -9,11 +9,11 @@
     <header>
       <a href="/" class="title"><h1>Movie Review Site</h1></a>
 
-      <table>
+      <table class="align-out">
         <tr>
           <td>
-            <form id="search-bar" action=/search method="post">
-              <input type="text" placeholder="Search Movie Database">
+            <form id="search-bar" action=/search method="get">
+              <input name="query" type="text" placeholder="Search Movie Database">
               <button type="submit">Search</button>
             </form>
           </td>
