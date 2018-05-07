@@ -14,5 +14,7 @@ function getCollectionFn (collection) {
 };
 
 module.exports = {
-	recipes: getCollectionFn("recipes")
+	movies: getCollectionFn("movies"),
+	users: getCollectionFn("users"),
+	reviews: getCollectionFn("reviews")
 }
