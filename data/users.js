@@ -45,7 +45,7 @@ async function getUserByUsername(username) {
 	return undefined;
 }
 
-async function checkCredentials(username, password) {
+async function loginUser(username, password) {
 	if (!username || typeof username != 'string' || !password || typeof password != 'string')
 		throw "username and password must be non-empty strings";
 
@@ -56,7 +56,7 @@ async function checkCredentials(username, password) {
 	}
 
 	if (user && await bcrypt.compare(password, user.hashedpassword))
-		return true;
+		return user;
 	else
 		return false;
 }
@@ -66,7 +66,7 @@ async function createUser(username, password) {
 		throw "username and password must be non-empty strings";
 
 	if (await getUserByUsername(username) != undefined)
-		return false;
+		return undefined;
 
 	var hashedpassword = await bcrypt.hash(password, saltRounds);
 
@@ -81,8 +81,7 @@ async function createUser(username, password) {
 	};
 
 	users.push(newUser);
-
-	return true;
+	return newUser;
 }
 
 //Gets all of the ratings that have been submitted by the user.
@@ -122,7 +121,7 @@ async function expireSessionID(sID) {
 
 module.exports = {
 	getUserByUsername,
-	checkCredentials,
+	loginUser,
 	getUserBySessionID,
 	addUserSessionID,
 	expireSessionID,

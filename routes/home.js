@@ -4,23 +4,20 @@ const userData = require("../data/users");
 const movieData = require("../data/movies")
 
 router.get("/", async (req, res) => {
-	var authenticated;
+	var user;
 	try {
-		var authenticated = await userData.getUserBySessionID(req.cookies.AuthCookie) !== undefined;
+		user = await userData.getUserBySessionID(req.cookies.AuthCookie);
 	} catch (e) {
-		authenticated = false;
+		user = undefined;
 	}
 
-	if (authenticated)
-		res.redirect('/private');
-	else {
-		var numMovies = 10;
-		var data = {
-			inTheaters: await movieData.getInTheaters(numMovies),
-			trending: await movieData.getInTheaters(numMovies)
-		};
-		res.render('index', data);
-	}
+	var numMovies = 10;
+	var data = {
+		user,
+		inTheaters: await movieData.getInTheaters(numMovies),
+		trending: await movieData.getInTheaters(numMovies)
+	};
+	res.render('index', data);
 });
 
 module.exports = router;

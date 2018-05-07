@@ -4,8 +4,20 @@ const userData = require("../data/users");
 const uuid = require('uuid/v4');
 
 router.get("/", async (req, res) => {
-	var data = { title: "Login" };
-	res.render("login", data);
+	const AuthCookie = req.cookies.AuthCookie;
+	var user;
+	try {
+		user = await userData.getUserBySessionID(AuthCookie);
+	} catch (e) {
+		user = undefined;
+	}
+
+	// Redirect to /private if already logged in
+	if (user) {
+		res.redirect("/private");
+	} else {
+		res.render("login");
+	}
 });
 
 router.post("/", async (req, res) => {
@@ -13,23 +25,22 @@ router.post("/", async (req, res) => {
 	const password = req.body.password;
 	
 	var error_message = "Incorrect username/password."
-	var authenticated = false;
+	var user = undefined;
 	try {
-		authenticated = await userData.checkCredentials(username, password);
+		user = await userData.loginUser(username, password);
 	} catch (e) {
 		error_message = "Empty username/password."
 	}
 
-	if (authenticated) {
+	if (user) {
 		// Create cookie
 		var sID = uuid();
 		res.cookie("AuthCookie", sID);
-		userData.addUserSessionID(username, sID);
+		userData.addUserSessionID(user.username, sID);
 
 		res.redirect("/private");
 	} else {
 		var data = {
-			title: "Home",
 			error: error_message
 		}
 		res.render("login", data);

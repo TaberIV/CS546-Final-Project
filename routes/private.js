@@ -5,21 +5,21 @@ const userData = require("../data/users");
 router.get("/", async (req, res) => {
 	const AuthCookie = req.cookies.AuthCookie;
 	var user = await userData.getUserBySessionID(AuthCookie);
-	var authenticated = user !== undefined;
 
-	if (authenticated) {
+	if (user) {
 		data = {
+			user,
 			title: "User Info",
-			user: user
 		}
 
 		res.render("private", data);
 	} else {
+		var errorNum = 403;
 		var data = {
-			title: "Error: 403",
+			errorNum: errorNum,
 			description: "User is not logged in."
 		}
-		res.status(403).render("error", data);
+		res.status(errorNum).render("error", data);
 	}
 });
 

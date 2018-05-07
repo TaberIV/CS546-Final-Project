@@ -4,8 +4,7 @@ const userData = require("../data/users");
 const uuid = require('uuid/v4');
 
 router.get("/", async (req, res) => {
-	var data = { title: "Login" };
-	res.render("login", data);
+	res.render("login");
 });
 
 router.post("/", async (req, res) => {
@@ -13,8 +12,7 @@ router.post("/", async (req, res) => {
 	const password = req.body.password;
 
 	var error_message = "Account with that username already exists";
-	var userCreated = false;
-
+	var user = undefined;
 	try {
 		userCreated = await userData.createUser(username, password);
 	} catch (e) {
@@ -31,7 +29,6 @@ router.post("/", async (req, res) => {
 		res.redirect("/private");
 	} else {
 		var data = {
-			title: "Home",
 			error: error_message
 		}
 		res.render("login", data);

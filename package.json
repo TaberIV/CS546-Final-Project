@@ -4,7 +4,8 @@
   "description": "A Movie/TV review site",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,6 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "mongodb": "^3.0.6",
-    "nodemon": "^1.17.3",
     "uuid": "^3.2.1"
   }
 }
