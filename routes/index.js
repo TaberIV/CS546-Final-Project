@@ -3,6 +3,7 @@ const loginRoute = require("./login");
 const signUpRoute = require("./signup");
 const privateRoute = require("./private");
 const logoutRoute = require("./logout");
+const moviesRoute = require("./movies");
 
 const userData = require("../data/users");
 

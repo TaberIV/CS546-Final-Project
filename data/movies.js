@@ -21,14 +21,14 @@ const movieArray = [
 			"monster"
 		],
 		link: "movies/JurrasicPark",
-		poster: "images/JurassicParkPoster.jpeg"
+		poster: "images/JurassicParkPoster.jpg"
 	},
 	{
 		_id: "quedv2eufyv",
 		title: "Warriors",
 		inTheaters: true,
 		reviews: [
-		'weijbdweiubfe'
+			'weijbdweiubfe'
 		],
 		cast: [
 			"Steve Urkel",
@@ -40,7 +40,7 @@ const movieArray = [
 			"monster"
 		],
 		link: "movies/Warriors",
-		poster: "images/WarriorsPoster.jpeg"
+		poster: "images/WarriorsPoster.jpg"
 	}
 ]
 
