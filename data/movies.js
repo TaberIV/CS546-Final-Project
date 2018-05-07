@@ -17,8 +17,8 @@ const movieArray = [
 			"adventure",
 			"monster"
 		],
-		link: "images/JurassicParkPoster.jpeg",
-		img: ""
+		link: "movies/JurrasicPark",
+		poster: "images/JurassicParkPoster.jpeg"
 	},
 	{
 		_id: "quedv2eufyv",
@@ -36,7 +36,8 @@ const movieArray = [
 			"adventure",
 			"monster"
 		],
-		link: "movies/Warriors"
+		link: "movies/Warriors",
+		poster: "images/WarriorsPoster.jpeg"
 	}
 ]
 

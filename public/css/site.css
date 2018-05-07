@@ -73,7 +73,6 @@ table.movies {
 	width: 100%;
 	text-align: left; 
 	overflow-x: scroll;
-  	height:150px;
    	display:block;
 }
 
