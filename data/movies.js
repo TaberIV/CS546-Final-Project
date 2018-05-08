@@ -21,7 +21,8 @@ const movieArray = [
 			"monster"
 		],
 		link: "",
-		poster: "/images/JurassicParkPoster.jpg"
+		poster: "/images/JurassicParkPoster.jpg",
+		releaseDate: "6/11/1993"
 	},
 	{
 		_id: "quedv2eufyv",
@@ -40,7 +41,8 @@ const movieArray = [
 			"monster"
 		],
 		link: "",
-		poster: "/images/WarriorsPoster.jpg"
+		poster: "/images/WarriorsPoster.jpg",
+		releaseDate: "13/42/20XX"
 	}
 ]
 
