@@ -11,13 +11,11 @@ router.get("/", async (req, res) => {
 		user = undefined;
 	}
 
-	var numMovies = 10;
 	var data = {
 		user,
-		inTheaters: await movieData.getInTheaters(numMovies),
-		trending: await movieData.getInTheaters(numMovies)
+		inTheaters: await movieData.getInTheaters()
 	};
-	res.render('index', data);
+	res.render('home', data);
 });
 
 module.exports = router;

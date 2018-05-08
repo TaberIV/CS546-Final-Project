@@ -3,52 +3,48 @@ const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
 const uuid = require("uuid");
 
-const movieArray = [
-	{
-		_id: "12asdf3fasdf",
-		title: "Jurassic Park",
-		inTheaters: true,
-		reviews: [
-			'jhbugvyghjn'
-		],
-		cast: [
-			"Jeff Goldblum",
-			"Samuel L. Jackson"
-		],
-		description: "Life finds a way.",
-		genres: [
-			"adventure",
-			"monster"
-		],
-		link: "",
-		poster: "/images/JurassicParkPoster.jpg",
-		releaseDate: "6/11/1993"
-	},
-	{
-		_id: "quedv2eufyv",
-		title: "Warriors",
-		inTheaters: true,
-		reviews: [
-			'weijbdweiubfe'
-		],
-		cast: [
-			"Steve Urkel",
-			"Adam Sandler"
-		],
-		description: "Poster on Gae's wall.",
-		genres: [
-			"adventure",
-			"monster"
-		],
-		link: "",
-		poster: "/images/WarriorsPoster.jpg",
-		releaseDate: "13/42/20XX"
-	}
-]
-
-for (var i = 0; i < movieArray.length; i++) {
-	movieArray[i].link = "/movies/" + movieArray[i]._id;
-}
+// const movieArray = [
+// 	{
+// 		_id: "12asdf3fasdf",
+// 		title: "Jurassic Park",
+// 		inTheaters: true,
+// 		reviews: [
+// 			'jhbugvyghjn'
+// 		],
+// 		cast: [
+// 			"Jeff Goldblum",
+// 			"Samuel L. Jackson"
+// 		],
+// 		description: "Life finds a way.",
+// 		genres: [
+// 			"adventure",
+// 			"monster"
+// 		],
+// 		link: "",
+// 		poster: "/images/JurassicParkPoster.jpg",
+// 		releaseDate: "6/11/1993"
+// 	},
+// 	{
+// 		_id: "quedv2eufyv",
+// 		title: "Warriors",
+// 		inTheaters: true,
+// 		reviews: [
+// 			'weijbdweiubfe'
+// 		],
+// 		cast: [
+// 			"Steve Urkel",
+// 			"Adam Sandler"
+// 		],
+// 		description: "Poster on Gae's wall.",
+// 		genres: [
+// 			"adventure",
+// 			"monster"
+// 		],
+// 		link: "",
+// 		poster: "/images/WarriorsPoster.jpg",
+// 		releaseDate: "13/42/20XX"
+// 	}
+// ]
 
 async function addMovie(title, inTheaters, cast, description, genres, poster){
 	try{
@@ -73,7 +69,7 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 			genres: genres,
 			poster: poster
 		}
-		
+
 		return await movieCollection.insertOne(newMovie);
 	} catch (e){
 		throw e;
@@ -83,11 +79,11 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 //Gets the movie by its given ID
 async function getMovieByID(_id) {
 	try{
-		if(_id == null || typeof _id !== "string")
+		if(!_id || typeof _id !== "string")
 			throw "_id must be a non-empty string";
 
 		let movieCollection = await movies();
-		return await movieCollection.findOne({_id:id});
+		return await movieCollection.findOne({ _id: _id });
 	} catch (e){
 		throw e;
 	}
@@ -97,12 +93,13 @@ async function getMovieByID(_id) {
 async function getInTheaters() {
 	try{
 		let movieCollection = await movies();
-		return await movieCollection.find({inTheaters: true});
+		let movieList = await (await movieCollection.find({ inTheaters: true }).toArray());
+		
+		return movieList;
 	} catch(e){
 		throw e;
 	}
 }
-
 
 //Gets the number of top rated movies as an array
 async function getTopMovies(numMovies){
