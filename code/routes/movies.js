@@ -4,13 +4,15 @@ const userData = require("../data/users");
 const movieData = require("../data/movies")
 
 router.get("/:id", async (req, res) => {
-	try{
+	try {
 		let id = req.params.id;
 		let movie = await movieData.getMovieByID(id);
+		var data = {
+			movie
+		};
 
-		res.render("movie", { movie });
-	}
-	catch (e) {
+		res.render("movie", data);
+	} catch (e) {
 		console.log(e);
 		var errorNum = 404;
 		var data = {

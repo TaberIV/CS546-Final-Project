@@ -1,9 +1,9 @@
 const dbConnection = require("./mongoConnection");
 
-function getCollectionFn (collection) {
+function getCollectionFn(collection) {
 	let _col = undefined;
 
-	return async function() {
+	return async function () {
 		if (!_col) {
 			const db = await dbConnection();
 			_col = await db.collection(collection);

@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
-	
+
 	var error_message = "Incorrect username/password."
 	var user = undefined;
 	try {

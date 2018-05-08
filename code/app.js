@@ -8,7 +8,7 @@
 
 // Imports
 const express = require('express');
-const exphbs =  require('express-handlebars')
+const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const configRoutes = require('./routes');

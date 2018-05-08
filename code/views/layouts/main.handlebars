@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Movie Database Website</title>
-    <link rel="stylesheet" href="/css/site.css">
-  </head>
-  <body>
-    <header>
-      <a href="/" class="title"><h1>Movie Review Site</h1></a>
 
-      <table class="align-out">
-        <tr>
-          <td>
-            <form id="search-bar" action=/search method="get">
-              <input name="query" type="text" placeholder="Search Movie Database">
-              <button type="submit">Search</button>
-            </form>
-          </td>
-          <td>
-            {{#if user}}
-              <a href="/private" class="account">{{user.username}}</a>
-            {{else}}
-              <a href="/login" class="account">Sign Up/Log In</a>
-            {{/if}}
-          </td>
-        </tr>
-      </table>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <title>Movie Database Website</title>
+  <link rel="stylesheet" href="/css/site.css">
+</head>
 
-    <main>
-      {{{ body }}}
-    </main>
+<body>
+  <header>
+    <a href="/" class="title">
+      <h1>Movie Review Site</h1>
+    </a>
 
-    <footer>
-      <p>Authors: E. Taber McFarlin, Matt Swentzel, John Hrabar, and Justin Zauderer</p>
-      <p>Stevens ID: 10406368</p>
-    </footer>
-  </body>
+    <table class="align-out">
+      <tr>
+        <td>
+          <form id="search-bar" action=/search method="get">
+            <input name="query" type="text" placeholder="Search Movie Database">
+            <button type="submit">Search</button>
+          </form>
+        </td>
+        <td>
+          {{#if user}}
+          <a href="/private" class="account">{{user.username}}</a>
+          {{else}}
+          <a href="/login" class="account">Sign Up/Log In</a>
+          {{/if}}
+        </td>
+      </tr>
+    </table>
+  </header>
+
+  <main>
+    {{{ body }}}
+  </main>
+
+  <footer>
+    <p>Authors: E. Taber McFarlin, Matt Swentzel, John Hrabar, and Justin Zauderer</p>
+    <p>Stevens ID: 10406368</p>
+  </footer>
+</body>
+
 </html>

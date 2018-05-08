@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 // Replace with mongo things
-const users = [
-	{
+const users = [{
 		username: "masterdetective123",
 		firstname: "Sherlock",
 		lastname: "Holmes",
@@ -29,11 +28,11 @@ const users = [
 		bio: "Harry Potter is a series of fantasy novels written by British author J. K. Rowling. The novels chronicle the life of a young wizard, Harry Potter, and his friends Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry . The main story arc concerns Harry's struggle against Lord Voldemort, a dark wizard who intends to become immortal, overthrow the wizard governing body known as the Ministry of Magic, and subjugate all wizards and Muggles.",
 		hashedpassword: "$2a$16$4o0WWtrq.ZefEmEbijNCGukCezqWTqz1VWlPm/xnaLM8d3WlS5pnK",
 		sessionIDs: []
-	}	
+	}
 ];
 
 async function getUserByUsername(username) {
-	if (!username ||typeof username != 'string')
+	if (!username || typeof username != 'string')
 		throw "username must be a non-empty string";
 
 	// Replace with mongo things
@@ -85,7 +84,7 @@ async function createUser(username, password) {
 }
 
 //Gets all of the ratings that have been submitted by the user.
-async function getUserRatings(username){
+async function getUserRatings(username) {
 	//MongoDB stuff
 }
 
