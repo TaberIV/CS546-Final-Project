@@ -76,6 +76,7 @@ table.movies {
 }
 
 table.movies td {
+	min-width: 175px;
 	padding-left: 10px;
 }
 
@@ -84,6 +85,8 @@ table.movies img {
 }
 
 table.movies p {
+	margin-top: 0px;
+	margin-bottom: 10px;
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
