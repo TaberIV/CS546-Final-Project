@@ -66,6 +66,7 @@ async function getTopMovies(numMovies){
 			topMovies.push(movieArray[i]);
 		}
 	}
+	
 	var rating = getAverageRating(movieArray[i]);
 	if(topMovies.length < numMovies || rating > topMovies[numMovies - 1]){
 		for(var j = 0; j < topMovies.length; j++){
