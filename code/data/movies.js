@@ -3,49 +3,6 @@ const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
 const uuid = require("uuid");
 
-// const movieArray = [
-// 	{
-// 		_id: "12asdf3fasdf",
-// 		title: "Jurassic Park",
-// 		inTheaters: true,
-// 		reviews: [
-// 			'jhbugvyghjn'
-// 		],
-// 		cast: [
-// 			"Jeff Goldblum",
-// 			"Samuel L. Jackson"
-// 		],
-// 		description: "Life finds a way.",
-// 		genres: [
-// 			"adventure",
-// 			"monster"
-// 		],
-// 		link: "",
-// 		poster: "/images/JurassicParkPoster.jpg",
-// 		releaseDate: "6/11/1993"
-// 	},
-// 	{
-// 		_id: "quedv2eufyv",
-// 		title: "Warriors",
-// 		inTheaters: true,
-// 		reviews: [
-// 			'weijbdweiubfe'
-// 		],
-// 		cast: [
-// 			"Steve Urkel",
-// 			"Adam Sandler"
-// 		],
-// 		description: "Poster on Gae's wall.",
-// 		genres: [
-// 			"adventure",
-// 			"monster"
-// 		],
-// 		link: "",
-// 		poster: "/images/WarriorsPoster.jpg",
-// 		releaseDate: "13/42/20XX"
-// 	}
-// ]
-
 async function addMovie(title, inTheaters, cast, description, genres, poster){
 	try{
 		if(!title || title.trim() == "")
