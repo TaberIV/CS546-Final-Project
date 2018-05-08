@@ -3,11 +3,23 @@ const router = express.Router();
 const userData = require("../data/users");
 const movieData = require("../data/movies")
 
-router.get("/", async (req, res) => {
-	res.redirect("/");
-});
+router.get("/:id", async (req, res) => {
+	try{
+		let id = req.params.id;
+		let movie = await movieData.getMovieByID(id);
 
-// router.get("/create/")
+		res.render("movie", { movie });
+	}
+	catch (e) {
+		console.log(e);
+		var errorNum = 404;
+		var data = {
+			errorNum: errorNum,
+			description: "the movie is not in the database"
+		}
+		res.status(errorNum).render("error", data);
+	}
+});
 
 
 module.exports = router;

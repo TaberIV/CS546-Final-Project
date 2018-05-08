@@ -9,7 +9,7 @@ const movieArray = [
 		title: "Jurassic Park",
 		inTheaters: true,
 		reviews: [
-		'jhbugvyghjn'
+			'jhbugvyghjn'
 		],
 		cast: [
 			"Jeff Goldblum",
@@ -20,8 +20,9 @@ const movieArray = [
 			"adventure",
 			"monster"
 		],
-		link: "movies/JurrasicPark",
-		poster: "images/JurassicParkPoster.jpg"
+		link: "",
+		poster: "/images/JurassicParkPoster.jpg",
+		releaseDate: "6/11/1993"
 	},
 	{
 		_id: "quedv2eufyv",
@@ -39,15 +40,16 @@ const movieArray = [
 			"adventure",
 			"monster"
 		],
-		link: "movies/Warriors",
-		poster: "images/WarriorsPoster.jpg"
+		link: "",
+		poster: "/images/WarriorsPoster.jpg",
+		releaseDate: "13/42/20XX"
 	}
 ]
 
-/*
-Adds a new movie to the database.
-Will be called using a form.
-*/
+for (var i = 0; i < movieArray.length; i++) {
+	movieArray[i].link = "/movies/" + movieArray[i]._id;
+}
+
 async function addMovie(title, inTheaters, cast, description, genres, poster){
 	try{
 		if(!title || title.trim() == "")
@@ -71,7 +73,7 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 			genres: genres,
 			poster: poster
 		}
-
+		
 		return await movieCollection.insertOne(newMovie);
 	} catch (e){
 		throw e;
