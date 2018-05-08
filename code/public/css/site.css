@@ -23,6 +23,10 @@ header table {
 	width: 100%;
 }
 
+table.align-out {
+	width: 100%
+}
+
 .align-out td:nth-child(odd) {
 	text-align: left;
 }

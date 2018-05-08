@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 			title: "User Info",
 		}
 
-		res.render("private", data);
+		res.render("/account", data);
 	} else {
 		var errorNum = 403;
 		var data = {

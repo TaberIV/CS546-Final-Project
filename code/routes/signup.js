@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 		res.cookie("AuthCookie", sID);
 		userData.addUserSessionID(username, sID);
 
-		res.redirect("/private");
+		res.redirect("/account");
 	} else {
 		var data = {
 			error: error_message

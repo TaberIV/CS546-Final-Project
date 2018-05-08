@@ -12,9 +12,9 @@ router.get("/", async (req, res) => {
 		user = undefined;
 	}
 
-	// Redirect to /private if already logged in
+	// Redirect to /account if already logged in
 	if (user) {
-		res.redirect("/private");
+		res.redirect("/account");
 	} else {
 		res.render("login");
 	}
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 		res.cookie("AuthCookie", sID);
 		userData.addUserSessionID(user.username, sID);
 
-		res.redirect("/private");
+		res.redirect("/account");
 	} else {
 		var data = {
 			error: error_message
