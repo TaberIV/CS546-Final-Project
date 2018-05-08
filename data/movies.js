@@ -50,21 +50,18 @@ Will be called using a form.
 */
 async function addMovie(title, inTheaters, cast, description, genres, poster){
 	try{
-		if(title == null || title.trim() == ""){
+		if(!title || title.trim() == "")
 			throw "Must provide a movie title";
-		}
-		else if(cast == null || cast.trim() == ""){
+		else if(!cast || cast.trim() == "")
 			throw "Must provide cast";
-		}
-		else if(description == null || description.trim() == ""){
+		else if(!description || description.trim() == "")
 			throw "Must provide a description";
-		}
-		else if(genres == null || genres.trim() == ""){
+		else if(!genres || genres.trim() == "")
 			throw "Must provide genres";
-		}
-		else if(poster == null || poster.trim() == ""){
+		else if(!poster || poster.trim() == "")
 			throw "Must provide a poster";
-		}
+
+		let movieCollection = await movies();
 		let newMovie = {
 			_id :  uuid.v4(),
 			title: title,
@@ -74,9 +71,8 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 			genres: genres,
 			poster: poster
 		}
-		let movieCollection = await movies();
-		await movieCollection.insertOne(newMovie);
-		return await 
+
+		return await movieCollection.insertOne(newMovie);
 	} catch (e){
 		throw e;
 	}
@@ -85,9 +81,9 @@ async function addMovie(title, inTheaters, cast, description, genres, poster){
 //Gets the movie by its given ID
 async function getMovieByID(_id) {
 	try{
-		if(_id == null || typeof _id !== "string"){
+		if(_id == null || typeof _id !== "string")
 			throw "_id must be a non-empty string";
-		}
+
 		let movieCollection = await movies();
 		return await movieCollection.findOne({_id:id});
 	} catch (e){

@@ -87,7 +87,7 @@ table.movies p {
 }
 
 /* Login Error Box */
-.login-error {
+.form-error {
 	border-radius: 25px;
 	border: 2px solid #e03a3a;
 	background: #F44542;
@@ -99,12 +99,12 @@ table.movies p {
 	vertical-align: middle;
 }
 
-.login-error h3 {
+.form-error h3 {
 	color: black;
 	margin: 0;
 }
 
-.login-error text {
+.form-error text {
 	color: black;
 }
 
