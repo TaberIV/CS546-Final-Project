@@ -16,15 +16,15 @@ function constructorMethod(app) {
 	app.use("/movies", moviesRoute);
 
 	app.use("*", async (req, res) => {
-		var user;
+		let user;
 		try {
 			user = await userData.getUserBySessionID(req.cookies.AuthCookie);
 		} catch (e) {
 			user = undefined;
 		}
 
-		var errorNum = 404;
-		var data = {
+		let errorNum = 404;
+		let data = {
 			user,
 			errorNum: errorNum,
 			description: "Page not found."

@@ -4,14 +4,14 @@ const userData = require("../data/users");
 const movieData = require("../data/movies")
 
 router.get("/", async (req, res) => {
-	var user;
+	let user;
 	try {
 		user = await userData.getUserBySessionID(req.cookies.AuthCookie);
 	} catch (e) {
 		user = undefined;
 	}
 
-	var data = {
+	let data = {
 		user,
 		inTheaters: await movieData.getInTheaters()
 	};

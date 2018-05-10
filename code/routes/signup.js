@@ -11,24 +11,23 @@ router.post("/", async (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 
-	var error_message = "Account with that username already exists";
-	var user = undefined;
+	let error_message = "Account with that username already exists";
+	let userCreated = false;
 	try {
 		userCreated = await userData.createUser(username, password);
 	} catch (e) {
-		console.log(e);
 		error_message = "Empty username/password."
 	}
 
 	if (userCreated) {
 		// Create cookie
-		var sID = uuid();
+		let sID = uuid();
 		res.cookie("AuthCookie", sID);
 		userData.addUserSessionID(username, sID);
 
 		res.redirect("/account");
 	} else {
-		var data = {
+		let data = {
 			error: error_message
 		}
 		res.render("login", data);

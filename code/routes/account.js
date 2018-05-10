@@ -5,8 +5,8 @@ const movieData = require("../data/movies");
 
 router.get("/", async (req, res) => {
 	const AuthCookie = req.cookies.AuthCookie;
-	var user = await userData.getUserBySessionID(AuthCookie);
-
+	let user = await userData.getUserBySessionID(AuthCookie);
+	
 	if (user) {
 		data = {
 			user,
@@ -15,8 +15,8 @@ router.get("/", async (req, res) => {
 
 		res.render("account", data);
 	} else {
-		var errorNum = 403;
-		var data = {
+		let errorNum = 403;
+		let data = {
 			errorNum: errorNum,
 			description: "User is not logged in."
 		}
@@ -54,7 +54,6 @@ router.post("/createMovie", async (req, res) => {
 			Netflix = true;
 		}
 		
-		console.log(req.body.inTheaters);
 		let cast = req.body.cast;
 		let description = req.body.description;
 		let genre = req.body.genre;
