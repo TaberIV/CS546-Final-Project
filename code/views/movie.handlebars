@@ -41,13 +41,27 @@
     </tr>
     <tr>
       <td>Where to Watch:</td>
-      {{#if movie.inTheaters}}
-        <td>In Theaters Now</td>
+      <td>
+        <ul>
+          {{#each movie.whereToWatch}}
+            <li>{{this}} </li>
+          {{/each}}
+        </ul>
+      </td>
+    </tr>
+      <td>Recommended Movies </td>
+      {{#each recommendedMovies}}
+      <td>
+        <a href="/movies/{{this._id}}" class="title">
+          <h3>{{this.title}}</h3>
+          <img src={{this.poster}}>
+        </a>
+        <h3>{{this.releaseDate}}</h3>
+        <p>{{this.description}}</p>
+      </td>
       {{else}}
-        {{#each movie.streamPlatforms}}
-          <td>{{this}}</td>
-        {{/each}}
-      {{/if}}
+        <td>No Recommendations</td>
+      {{/each}}
     </tr>
   </table>
 </article>

@@ -3,65 +3,60 @@ const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
 const uuid = require("uuid");
 
-async function addMovie(title, releaseDate, director, inTheaters, AmazonPrimeVideo, Hulu, Netflix, cast, description, genres, poster) {
-	try {
-		if (!title || title.trim() == "")
-			throw "Must provide a movie title";
-		else if (!releaseDate || releaseDate.trim() == "")
-			throw "Must provide a release date";
-		else if (!director || director.trim() == "")
-			throw "Must provide a director";
+async function addMovie(movieInfo) {
+	// Ensure all required info is present
+	if (!movieInfo.movieTitle || movieInfo.movieTitle.trim() == "")
+		throw "Must provide a movie title";
+	else if (!movieInfo.releaseDate || movieInfo.releaseDate.trim() == "")
+		throw "Must provide a release date";
+	else if (!movieInfo.director || movieInfo.director.trim() == "")
+		throw "Must provide a director";
+	else if (!movieInfo.cast || movieInfo.cast.trim() == "")
+		throw "Must provide cast";
+	else if (!movieInfo.description || movieInfo.description.trim() == "")
+		throw "Must provide a description";
+	else if (!movieInfo.genre)
+		throw "Must provide genres";
+	else if (!movieInfo.poster || movieInfo.poster.trim() == "")
+		throw "Must provide a poster";
 
-		else if (!cast || cast.trim() == "")
-			throw "Must provide cast";
-		else if (!description || description.trim() == "")
-			throw "Must provide a description";
-		else if (!genres)
-			throw "Must provide genres";
-		else if (!poster || poster.trim() == "")
-			throw "Must provide a poster";
+	// Adjust info to be more usable
+	if (!Array.isArray(movieInfo.genre))
+		movieInfo.genre = [movieInfo.genre];
+	movieInfo.cast = movieInfo.cast.split("\n");
 
-		if(!Array.isArray(genres)){
-			genres = [genres];
-		}
-		cast = cast.split("\n");
-
-		let whereToWatch = [];
-		if(inTheaters == true){
-			whereToWatch.push("In Theaters");
-		}
-		if(AmazonPrimeVideo == true){
-			whereToWatch.push("Amazon Prime Video");
-		}
-		if(Hulu == true){
-			whereToWatch.push("Hulu");
-		}
-		if(Netflix == true){
-			whereToWatch.push("Netflix");
-		}
-		if(!whereToWatch.length){
-			whereToWatch.push("Unavailable");
-		}
-		let movieCollection = await movies();
-		let newMovie = {
-			_id: uuid.v4(),
-			title: title,
-			releaseDate: releaseDate,
-			director: director,
-			inTheaters: inTheaters,
-			whereToWatch: whereToWatch,
-			cast: cast,
-			description: description,
-			genres: genres,
-			poster: poster
-		}
-
-		await movieCollection.insertOne(newMovie);
-
-		return newMovie._id;
-	} catch (e) {
-		throw e;
+	let whereToWatch = [];
+	if (movieInfo.inTheaters) {
+		whereToWatch.push("In Theaters");
+		movieInfo.inTheaters = true;
 	}
+	if (movieInfo.AmazonPrimeVideo)
+		whereToWatch.push("Amazon Prime Video");
+	if (movieInfo.Hulu)
+		whereToWatch.push("Hulu");
+	if (movieInfo.Netflix)
+		whereToWatch.push("Netflix");
+	
+	if (whereToWatch.length == 0)
+		whereToWatch.push("Unavailable");
+
+	let newMovie = {
+		_id: uuid.v4(),
+		title: movieInfo.movieTitle,
+		releaseDate: movieInfo.releaseDate,
+		director: movieInfo.director,
+		inTheaters: movieInfo.inTheaters,
+		whereToWatch: whereToWatch,
+		cast: movieInfo.cast,
+		description: movieInfo.description,
+		genres: movieInfo.genre,
+		poster: movieInfo.poster
+	}
+
+	let movieCollection = await movies();
+	await movieCollection.insertOne(newMovie);
+
+	return newMovie._id;
 }
 
 //Gets the movie by its given ID
@@ -74,6 +69,16 @@ async function getMovieByID(_id) {
 		return await movieCollection.findOne({
 			_id: _id
 		});
+	} catch (e) {
+		throw e;
+	}
+}
+
+//Gets an array of all movies
+async function getAllMovies() {
+	try {
+		let movieCollection = await movies();
+		return await movieCollection.find({}).toArray();
 	} catch (e) {
 		throw e;
 	}
@@ -93,18 +98,52 @@ async function getInTheaters() {
 	}
 }
 
+//Gets all recommended movies associated 
+async function getRecommendedMovies(movieID) {
+	try {
+		let movieCollection = await movies();
+
+		let recommendedMovies = [];
+
+		//Array of all movies
+		let allMovies = await getAllMovies();
+
+		//The movie we want to find recommendations for
+		let currentMovie = await getMovieByID(movieID);
+
+		let genreIntersection = [];
+
+		//Iterate through all movies
+		allMovies.forEach(function (element) {
+			genreIntersection = [];
+			//Intersect genre arrays of both movies
+			genreIntersection = element.genres.filter(function (n) {
+				return currentMovie.genres.indexOf(n) !== -1;
+			});
+			if (genreIntersection.length > 0 && element.title !== currentMovie.title) {
+				recommendedMovies.push(element);
+			}
+			//If greater than 1, recommend it
+		});
+
+		return recommendedMovies;
+	} catch (e) {
+		throw e;
+	}
+}
+
 //Gets the number of top rated movies as an array
 async function getTopMovies(numMovies) {
-	var topMovies = [];
-	for (var i = 0; i < movieArray.length; i++) {
+	let topMovies = [];
+	for (let i = 0; i < movieArray.length; i++) {
 		if (topMovies.length === 0) {
 			topMovies.push(movieArray[i]);
 		}
 	}
 
-	var rating = getAverageRating(movieArray[i]);
+	let rating = getAverageRating(movieArray[i]);
 	if (topMovies.length < numMovies || rating > topMovies[numMovies - 1]) {
-		for (var j = 0; j < topMovies.length; j++) {
+		for (let j = 0; j < topMovies.length; j++) {
 			if (rating < getAverageRating(topMovies[j])) {
 				topMovies.splice(j, 0, movieArray[i]);
 				break;
@@ -121,5 +160,6 @@ module.exports = {
 	addMovie,
 	getMovieByID,
 	getInTheaters,
+	getRecommendedMovies,
 	getTopMovies
 };

@@ -37,12 +37,7 @@ table.align-out {
 
 /* Headings */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	color: #333;
 	margin-bottom: 5px;
 }
@@ -83,7 +78,7 @@ table.homepage {
 }
 
 table.movies {
-	background-color: #E0E0E0;
+	background-color: #e0e0e0;
 	margin: 10px;
 	width: 100%;
 	overflow-x: scroll;
@@ -113,7 +108,7 @@ table.movies p {
 .form-error {
 	border-radius: 25px;
 	border: 2px solid #e03a3a;
-	background: #F44542;
+	background: #f44542;
 	padding: 15px;
 	width: max-content;
 	height: max-content;
@@ -129,14 +124,26 @@ table.movies p {
 .form-error text {
 	color: black;
 }
+
 /* Movie Info Page */
+
 .movieInfo {
-	float:left;
+	float: left;
 	width: 40%;
 }
 
+.movieInfo tr {
+	text-align: left;
+}
+
+.caption {
+	text-align: center;
+	font-weight: bold;
+	font-size: 14pt;
+}
+
 figure.moviePoster {
-	float:left;
+	float: left;
 	width: auto;
 	margin: 0px;
 	margin-right: 10px;
@@ -150,7 +157,7 @@ figure.moviePoster img {
 /* Footer */
 
 footer {
-	background-color: #F0F0F0;
+	background-color: #f0f0f0;
 	position: fixed;
 	padding: 5px;
 	margin-top: 15px;

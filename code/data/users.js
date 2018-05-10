@@ -1,18 +1,20 @@
 const mongodb = require("mongodb");
 const mongoCollections = require("../config/mongoCollections");
+const uuid = require('uuid/v4');
 const users = mongoCollections.users;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 async function getUserByUsername(username) {
-	try{
+	try {
 		if (!username || typeof username != 'string')
 			throw "username must be a non-empty string";
+		
 		let userCollection = await users();
-		return await userCollection.findOne({
-			username: username
-		});
-	} catch (e){
+
+		let user = await userCollection.findOne({ username });
+		return user;
+	} catch (e) {
 		throw e;
 	}
 }
@@ -21,8 +23,9 @@ async function loginUser(username, password) {
 	if (!username || typeof username != 'string' || !password || typeof password != 'string')
 		throw "username and password must be non-empty strings";
 
+	let user = undefined;
 	try {
-		let user = await getUserByUsername(username);
+		user = await getUserByUsername(username);
 	} catch (e) {
 		return false;
 	}
@@ -34,32 +37,24 @@ async function loginUser(username, password) {
 }
 
 async function createUser(username, password) {
-	try{
-		if (!username || typeof username != 'string' || !password || typeof password != 'string')
-			throw "username and password must be non-empty strings";
+	if (!username || typeof username != 'string' || !password || typeof password != 'string')
+		throw "username and password must be non-empty strings";
 
-		if (await getUserByUsername(username) != undefined)
-			return undefined;
+	if ((await getUserByUsername(username)) != undefined)
+		return undefined;
 
-		let hashedpassword = await bcrypt.hash(password, saltRounds);
+	let hashedpassword = await bcrypt.hash(password, saltRounds);
 
-		let userCollection = await users();
+	let userCollection = await users();
 
-		let newUser = {
-			username: username,
-			firstname: "New",
-			lastname: "Guy",
-			profession: "N00b",
-			bio: "Just joined!",
-			hashedpassword: hashedpassword,
-			sessionIDs: []
-		};
-
-		await userCollection.insertOne(newUser);
-		return await userCollection.findOne({username: username});
-	} catch (e){
-		throw e;
-	}
+	let newUser = {
+		_id: uuid(),
+		username: username,
+		hashedpassword: hashedpassword,
+		sessionIDs: []
+	};
+	
+	return await userCollection.insert(newUser);
 }
 
 //Gets all of the ratings that have been submitted by the user.
@@ -68,36 +63,31 @@ async function getUserRatings(username) {
 }
 
 async function getUserBySessionID(sID) {
-	try{
-		let userCollection = await users();
+	try {
+		if (!sID)
+			return undefined;
 		
-		return await userCollection.find({sessionIDs: sID});
-	} catch (e){
+		let userCollection = await users();
+		let user = await userCollection.findOne({ sessionIDs: sID });
+
+		return user;
+	} catch (e) {
 		throw e;
 	}
 }
 
 async function addUserSessionID(username, sID) {
-	try{
-		let userCollection = await users();
-		let currentUser = await getUserByUsername(username);
+	let userCollection = await users();
+	let currentUser = await getUserByUsername(username);
 
-		await userCollection.update(
-			{username: username},
-			{
-				$set:{
-					sessionIDs: currentUser.sessionIDs.push(sID)
-				}
-			}
-		);
-		return await userCollection.findOne({username: username});
-	} catch (e){
-		throw e;
-	}
+	const _id = currentUser._id;
+	currentUser.sessionIDs.push(sID);
+
+	await userCollection.update({ _id }, currentUser);
 }
 
 async function expireSessionID(sID) {
-	try{
+	try {
 		let userCollection = await users();
 		let currentUser = await getUserByUsername(username);
 
@@ -105,16 +95,9 @@ async function expireSessionID(sID) {
 		let currentsIDs = currentUser.sessionIDs;
 		currentsIDs.splice(indexOfsID, 1);
 
-		await userCollection.update(
-			{username: username},
-			{
-				$set:{
-					sessionIDs: currentsIDs
-				}
-			}
-		);
-		return await userCollection.findOne({username: username});
-	} catch (e){
+		await userCollection.update({ username }, {	$set: {	sessionIDs: currentsIDs	}});
+		return await userCollection.findOne({ username: username });
+	} catch (e) {
 		throw e;
 	}
 }
