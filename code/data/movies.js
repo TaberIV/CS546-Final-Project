@@ -108,7 +108,6 @@ async function getRecommendedMovies(movieID){
 	try{
 		let movieCollection = await movies();
 
-		//Empty array of recommended movies, will be filled and returned
 		let recommendedMovies = [];
 
 		//Array of all movies
@@ -126,8 +125,8 @@ async function getRecommendedMovies(movieID){
 			genreIntersection = element.genres.filter(function(n) {
 			    return currentMovie.genres.indexOf(n) !== -1;
 			});
-			if(genreIntersection.length > 0){
-				recommendedMovies.push(currentMovie);
+			if(genreIntersection.length > 0 && element.title !== currentMovie.title){
+				recommendedMovies.push(element.title);
 			}
 			//If greater than 1, recommend it
 		});
@@ -166,5 +165,6 @@ module.exports = {
 	addMovie,
 	getMovieByID,
 	getInTheaters,
+	getRecommendedMovies,
 	getTopMovies
 };

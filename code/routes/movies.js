@@ -8,8 +8,10 @@ router.get("/:id", async (req, res) => {
 	try {
 		let id = req.params.id;
 		let movie = await movieData.getMovieByID(id);
+		let recommendedMovies = await movieData.getRecommendedMovies(id);
 		var data = {
-			movie
+			movie,
+			recommendedMovies
 		};
 
 		res.render("movie", data);
