@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const userData = require("../data/users");
-const movieData = require("../data/movies")
+const movieData = require("../data/movies");
+
 
 router.get("/:id", async (req, res) => {
 	try {
