@@ -136,8 +136,8 @@ table.movies p {
 	text-align: left;
 }
 
-.caption {
-	text-align: center;
+figcaption {
+	text-align: left;
 	font-weight: bold;
 	font-size: 14pt;
 }

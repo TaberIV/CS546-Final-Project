@@ -6,7 +6,7 @@
 {{/if}}
 
 
-<form id="creation-form" action="/account/createMovie" method="post">
+<form id="movieCreation-form" action="/account/createMovie" method="post">
   <table>
     <tr>
       <td><label for="movieTitle">Title:</label></td>
@@ -25,7 +25,7 @@
 
     <tr>
       <td><label for="cast">Cast:</label></td>
-      <td><textarea name="cast" form="creation-form" id="cast"></textarea></td>
+      <td><textarea name="cast" form="movieCreation-form" id="cast"></textarea></td>
     </tr>
 
     <tr>
@@ -51,6 +51,7 @@
           <option value="Romance">Romance</option>
           <option value="Science Fiction">Science Fiction</option>
           <option value="Western">Western</option>
+        </select>
       </td>
     </tr>
 

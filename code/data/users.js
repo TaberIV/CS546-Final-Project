@@ -3,6 +3,7 @@ const mongoCollections = require("../config/mongoCollections");
 const uuid = require('uuid/v4');
 const users = mongoCollections.users;
 const bcrypt = require('bcrypt');
+
 const saltRounds = 10;
 
 async function getUserByUsername(username) {
