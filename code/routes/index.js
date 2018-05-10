@@ -4,6 +4,7 @@ const signUpRoute = require("./signup");
 const accountRoute = require("./account");
 const logoutRoute = require("./logout");
 const moviesRoute = require("./movies");
+const searchRoute = require("./search");
 const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
 function constructorMethod(app) {
@@ -13,6 +14,7 @@ function constructorMethod(app) {
 	app.use("/account", accountRoute);
 	app.use("/logout", logoutRoute);
 	app.use("/movies", moviesRoute);
+	app.use("/search", searchRoute);
 
 	app.use("*", async (req, res) => {
 		let user = await getUserFromCookie(req);

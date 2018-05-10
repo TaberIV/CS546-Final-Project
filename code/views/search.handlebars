@@ -6,7 +6,7 @@
 {{/if}}
 
 <article class="searchPage">
-	<table class="searchResultsTable">
+	<table class="movies">
 		{{#each searchResults}}
 		<tr>
 			<td>
@@ -17,12 +17,18 @@
 				<h3>{{this.releaseDate}}</h3>
 				<p>{{this.description}}</p>
 			</td>
-		</tr>
-		{{else}}
-			<tr>
+			{{else}}
 				<td>No results</td>
-			</tr>
-		{{/else}}
+		</tr>
 		{{/each}}
+		{{#if user}}
+		<tr>
+			<td><a href="/account/CreateMovie">Didn't find what you're looking for? Click here to add it!</a></td>
+		</tr>
+			{{else}}
+				<tr>
+					<td><a href="/login">Didn't find what you're looking for? Click here to log in and add it!</a></td>
+				</tr>
+		{{/if}}
 	</table>
 </article>

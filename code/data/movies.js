@@ -74,6 +74,27 @@ async function getMovieByID(_id) {
 	}
 }
 
+
+async function searchMovies(searchInfo) {
+	try {
+		if (!searchInfo || typeof searchInfo !== "string")
+			return [];
+
+		searchInfo = searchInfo.toLowerCase();
+		let regEx = new RegExp('.*' + searchInfo + '.*', 'i');
+		console.log(regEx);
+		let movieCollection = await movies();
+		let searchResults = await movieCollection.find(
+		{
+			title: regEx
+		}).toArray();
+		//console.log(searchResults);
+		return searchResults;
+	} catch (e) {
+		throw e;
+	}
+}
+
 //Gets an array of all movies
 async function getAllMovies() {
 	try {
@@ -161,5 +182,6 @@ module.exports = {
 	getMovieByID,
 	getInTheaters,
 	getRecommendedMovies,
-	getTopMovies
+	getTopMovies,
+	searchMovies
 };
