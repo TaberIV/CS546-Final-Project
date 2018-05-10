@@ -1,5 +1,6 @@
 const mongodb = require("mongodb");
 const mongoCollections = require("../config/mongoCollections");
+const uuid = require('uuid/v4');
 const users = mongoCollections.users;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -10,9 +11,7 @@ async function getUserByUsername(username) {
 			throw "username must be a non-empty string";
 		let userCollection = await users();
 
-		return await userCollection.findOne({
-			username
-		});
+		return await userCollection.findOne({ username });
 	} catch (e) {
 		throw e;
 	}
@@ -46,9 +45,9 @@ async function createUser(username, password) {
 		let hashedpassword = await bcrypt.hash(password, saltRounds);
 
 		let userCollection = await users();
-		
+
 		let newUser = {
-			_id: uuid.v4(),
+			_id: uuid(),
 			username: username,
 			hashedpassword: hashedpassword,
 			sessionIDs: []
@@ -71,7 +70,7 @@ async function getUserBySessionID(sID) {
 			return undefined;
 		
 		let userCollection = await users();
-		let user = await (userCollection.find({ sessionIDs: sID }).toArray())[0];
+		let user = await userCollection.findOne({ sessionIDs: sID });
 
 		return user;
 	} catch (e) {
@@ -87,7 +86,7 @@ async function addUserSessionID(username, sID) {
 		const uID = currentUser.id;
 		currentUser.sessionIDs.push(sID);
 
-		await userCollection.update({ uID }, { sessionIDs: currentUser.sessionIDs });
+		await userCollection.update({ uID }, currentUser);
 		return await userCollection.findOne({ username });
 	} catch (e) {
 		throw e;

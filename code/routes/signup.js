@@ -12,12 +12,11 @@ router.post("/", async (req, res) => {
 	const password = req.body.password;
 
 	let error_message = "Account with that username already exists";
-	let user = undefined;
+	let userCreated = false;
 	try {
 		userCreated = await userData.createUser(username, password);
 	} catch (e) {
 		error_message = "Empty username/password."
-		error_message = e;
 	}
 
 	if (userCreated) {

@@ -54,7 +54,6 @@ router.post("/createMovie", async (req, res) => {
 			Netflix = true;
 		}
 		
-		console.log(req.body.inTheaters);
 		let cast = req.body.cast;
 		let description = req.body.description;
 		let genre = req.body.genre;
