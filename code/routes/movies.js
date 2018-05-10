@@ -8,15 +8,10 @@ router.get("/:id", async (req, res) => {
 	try {
 		let id = req.params.id;
 		let movie = await movieData.getMovieByID(id);
-<<<<<<< HEAD
 		let recommendedMovies = await movieData.getRecommendedMovies(id);
 		var data = {
 			movie,
 			recommendedMovies
-=======
-		let data = {
-			movie
->>>>>>> 4579366ddb59728fe2b4b4b0a2581a579360abf9
 		};
 
 		res.render("movie", data);
