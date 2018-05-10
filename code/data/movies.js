@@ -27,7 +27,9 @@ async function addMovie(title, inTheaters, cast, description, genres, poster) {
 			poster: poster
 		}
 
-		return await movieCollection.insertOne(newMovie);
+		await movieCollection.insertOne(newMovie);
+
+		return newMovie._id;
 	} catch (e) {
 		throw e;
 	}

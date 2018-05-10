@@ -1,0 +1,44 @@
+{{#if error}}
+<div id="form-error" class="error">
+  <h3>Error:</h3>
+  {{ error }}
+</div>
+{{/if}}
+
+
+<form id="creation-form" action="/account/createMovie" method="post">
+  <table>
+    <tr>
+      <td><label for="movieTitle">Title:</label></td>
+      <td><input type="text" name="movieTitle" id="movieTitle"></td>
+    </tr>
+
+    <tr>
+      <td><label for="director">Director:</label></td>
+      <td><input type="text" name="director" id="director"></td>
+    </tr>
+
+    <tr>
+      <td><label for="cast">Cast:</label></td>
+      <td><textarea name="cast" form="creation-form" id="cast"></textarea></td>
+    </tr>
+
+    <tr>
+      <td><label for="description">Description:</label></td>
+      <td><input type="text" name="description" id="description"></td>
+    </tr>
+
+    <tr>
+      <td><label for="genre">Genre(s):</label></td>
+      <td>
+        <select multiple name="genre">
+          <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Horror">Horror</option>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="submit" value="Submit Movie"></td>
+    </tr>
+  </table>
+</form>
