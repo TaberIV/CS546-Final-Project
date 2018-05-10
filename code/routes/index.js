@@ -4,8 +4,7 @@ const signUpRoute = require("./signup");
 const accountRoute = require("./account");
 const logoutRoute = require("./logout");
 const moviesRoute = require("./movies");
-
-const userData = require("../data/users");
+const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
 function constructorMethod(app) {
 	app.use("/", homeRoute);
@@ -16,12 +15,7 @@ function constructorMethod(app) {
 	app.use("/movies", moviesRoute);
 
 	app.use("*", async (req, res) => {
-		let user;
-		try {
-			user = await userData.getUserBySessionID(req.cookies.AuthCookie);
-		} catch (e) {
-			user = undefined;
-		}
+		let user = await getUserFromCookie(req);
 
 		let errorNum = 404;
 		let data = {

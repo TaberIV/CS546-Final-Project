@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const userData = require("../data/users");
 const movieData = require("../data/movies")
+const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
 router.get("/", async (req, res) => {
-	let user;
-	try {
-		user = await userData.getUserBySessionID(req.cookies.AuthCookie);
-	} catch (e) {
-		user = undefined;
-	}
+	let user = await getUserFromCookie(req);
 
 	let data = {
 		user,

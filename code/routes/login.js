@@ -2,15 +2,10 @@ const express = require("express");
 const router = express.Router();
 const userData = require("../data/users");
 const uuid = require('uuid/v4');
+const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
 router.get("/", async (req, res) => {
-	const AuthCookie = req.cookies.AuthCookie;
-	let user;
-	try {
-		user = await userData.getUserBySessionID(AuthCookie);
-	} catch (e) {
-		user = undefined;
-	}
+	let user = await getUserFromCookie(req);
 
 	// Redirect to /account if already logged in
 	if (user) {
