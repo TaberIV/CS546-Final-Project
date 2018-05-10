@@ -25,7 +25,19 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/createMovie", async (req, res) => {
-	res.render("movieCreation");
+	const AuthCookie = req.cookies.AuthCookie;
+	let user = await userData.getUserBySessionID(AuthCookie);
+	if (user) {
+		res.render("movieCreation");
+	}
+	else {
+		let errorNum = 403;
+		let data = {
+			errorNum: errorNum,
+			description: "User is not logged in."
+		}
+		res.status(errorNum).render("error", data);
+	}
 });
 
 router.post("/createMovie", async (req, res) => {
@@ -54,7 +66,6 @@ router.post("/createMovie", async (req, res) => {
 			Netflix = true;
 		}
 		
-		console.log(req.body.inTheaters);
 		let cast = req.body.cast;
 		let description = req.body.description;
 		let genre = req.body.genre;
