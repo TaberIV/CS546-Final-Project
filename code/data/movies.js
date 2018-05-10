@@ -124,7 +124,7 @@ async function getRecommendedMovies(movieID){
 			    return currentMovie.genres.indexOf(n) !== -1;
 			});
 			if(genreIntersection.length > 0 && element.title !== currentMovie.title){
-				recommendedMovies.push(element.title);
+				recommendedMovies.push(element);
 			}
 			//If greater than 1, recommend it
 		});
