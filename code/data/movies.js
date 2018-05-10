@@ -74,6 +74,21 @@ async function getMovieByID(_id) {
 	}
 }
 
+
+async function searchMovies(searchInfo) {
+	try {
+		if (!searchInfo || typeof searchInfo !== "string")
+			throw "searchInfo must be a non-empty string";
+
+		let movieCollection = await movies();
+		return await movieCollection.find({
+			title.includes(searchInfo);
+		});
+	} catch (e) {
+		throw e;
+	}
+}
+
 //Gets an array of all movies
 async function getAllMovies() {
 	try {
@@ -162,4 +177,5 @@ module.exports = {
 	getInTheaters,
 	getRecommendedMovies,
 	getTopMovies
+	searchMovies
 };
