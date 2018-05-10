@@ -78,12 +78,18 @@ async function getMovieByID(_id) {
 async function searchMovies(searchInfo) {
 	try {
 		if (!searchInfo || typeof searchInfo !== "string")
-			throw "searchInfo must be a non-empty string";
+			return [];
 
+		searchInfo = searchInfo.toLowerCase();
+		let regEx = new RegExp('.*' + searchInfo + '.*', 'i');
+		console.log(regEx);
 		let movieCollection = await movies();
-		return await movieCollection.find({
-			title.includes(searchInfo);
-		});
+		let searchResults = await movieCollection.find(
+		{
+			title: regEx
+		}).toArray();
+		//console.log(searchResults);
+		return searchResults;
 	} catch (e) {
 		throw e;
 	}
@@ -176,6 +182,6 @@ module.exports = {
 	getMovieByID,
 	getInTheaters,
 	getRecommendedMovies,
-	getTopMovies
+	getTopMovies,
 	searchMovies
 };
