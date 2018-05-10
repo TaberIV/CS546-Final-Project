@@ -48,6 +48,16 @@ async function getMovieByID(_id) {
 	}
 }
 
+//Gets an array of all movies
+async function getAllMovies(){
+	try{
+		let movieCollection = await movies();
+		return await movieCollection.find({}).toArray();
+	} catch (e){
+		throw e;
+	}
+}
+
 //Gets all the movies that are currently in theaters
 async function getInTheaters() {
 	try {
@@ -58,6 +68,41 @@ async function getInTheaters() {
 
 		return movieList;
 	} catch (e) {
+		throw e;
+	}
+}
+
+//Gets all recommended movies associated 
+async function getRecommendedMovies(movieID){
+	try{
+		let movieCollection = await movies();
+
+		//Empty array of recommended movies, will be filled and returned
+		let recommendedMovies = [];
+
+		//Array of all movies
+		let allMovies = await getAllMovies();
+
+		//The movie we want to find recommendations for
+		let currentMovie = await getMovieByID(movieID);
+
+		let genreIntersection = [];
+
+		//Iterate through all movies
+		allMovies.forEach(function(element){
+			genreIntersection = [];
+			//Intersect genre arrays of both movies
+			genreIntersection = element.genres.filter(function(n) {
+			    return currentMovie.genres.indexOf(n) !== -1;
+			});
+			if(genreIntersection.length > 0){
+				recommendedMovies.push(currentMovie);
+			}
+			//If greater than 1, recommend it
+		});
+
+		return recommendedMovies;
+	} catch (e){
 		throw e;
 	}
 }

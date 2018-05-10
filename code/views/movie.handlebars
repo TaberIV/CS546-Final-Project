@@ -49,5 +49,18 @@
         {{/each}}
       {{/if}}
     </tr>
+      {{#each movie.inTheaters}}
+      <td>
+        <a href="/movies/{{movie._id}}" class="title">
+          <h3>{{movie.title}}</h3>
+          <img src={{movie.poster}}>
+        </a>
+        <h3>{{movie.releaseDate}}</h3>
+        <p>{{movie.description}}</p>
+      </td>
+      {{else}}
+        <td>No Recommendations</td>
+      {{/each}}
+    </tr>
   </table>
 </article>
