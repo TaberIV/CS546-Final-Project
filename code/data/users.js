@@ -91,7 +91,7 @@ async function addUserSessionID(username, sID) {
 			}
 		);
 		return await userCollection.findOne({username: username});
-	} catch e{
+	} catch (e){
 		throw e;
 	}
 }
@@ -114,7 +114,7 @@ async function expireSessionID(sID) {
 			}
 		);
 		return await userCollection.findOne({username: username});
-	} catch e{
+	} catch (e){
 		throw e;
 	}
 }
