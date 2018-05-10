@@ -9,9 +9,11 @@ async function getUserByUsername(username) {
 	try {
 		if (!username || typeof username != 'string')
 			throw "username must be a non-empty string";
+		
 		let userCollection = await users();
 
-		return await userCollection.findOne({ username });
+		let user = await userCollection.findOne({ username });
+		return user;
 	} catch (e) {
 		throw e;
 	}
@@ -35,28 +37,24 @@ async function loginUser(username, password) {
 }
 
 async function createUser(username, password) {
-	try {
-		if (!username || typeof username != 'string' || !password || typeof password != 'string')
-			throw "username and password must be non-empty strings";
+	if (!username || typeof username != 'string' || !password || typeof password != 'string')
+		throw "username and password must be non-empty strings";
 
-		if (await getUserByUsername(username) != undefined)
-			return undefined;
+	if ((await getUserByUsername(username)) != undefined)
+		return undefined;
 
-		let hashedpassword = await bcrypt.hash(password, saltRounds);
+	let hashedpassword = await bcrypt.hash(password, saltRounds);
 
-		let userCollection = await users();
+	let userCollection = await users();
 
-		let newUser = {
-			_id: uuid(),
-			username: username,
-			hashedpassword: hashedpassword,
-			sessionIDs: []
-		};
-		
-		return await userCollection.insert(newUser);
-	} catch (e) {
-		throw e;
-	}
+	let newUser = {
+		_id: uuid(),
+		username: username,
+		hashedpassword: hashedpassword,
+		sessionIDs: []
+	};
+	
+	return await userCollection.insert(newUser);
 }
 
 //Gets all of the ratings that have been submitted by the user.
@@ -79,18 +77,13 @@ async function getUserBySessionID(sID) {
 }
 
 async function addUserSessionID(username, sID) {
-	try {
-		let userCollection = await users();
-		let currentUser = await getUserByUsername(username);
+	let userCollection = await users();
+	let currentUser = await getUserByUsername(username);
 
-		const uID = currentUser.id;
-		currentUser.sessionIDs.push(sID);
+	const _id = currentUser._id;
+	currentUser.sessionIDs.push(sID);
 
-		await userCollection.update({ uID }, currentUser);
-		return await userCollection.findOne({ username });
-	} catch (e) {
-		throw e;
-	}
+	await userCollection.update({ _id }, currentUser);
 }
 
 async function expireSessionID(sID) {
