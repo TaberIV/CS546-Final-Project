@@ -2,7 +2,7 @@
   <h2>{{movie.title}}</h2>
   <figure class="moviePoster">
     <img src={{movie.poster}}>
-    <figcaption class="caption">Rating:</figcaption>
+    <figcaption class="caption">Rating: {{movie.rating}}</figcaption>
   </figure>
   
   <table class="movieInfo">
@@ -14,6 +14,11 @@
       <td>Description:</td>
       <td>{{movie.description}}</td>
     </tr>
+    <tr>
+      <td>Director:</td>
+      <td>{{movie.director}}</td>
+    </tr>
+    <tr>
     <tr>
       <td>Cast:</td>
       <td>

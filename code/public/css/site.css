@@ -131,13 +131,27 @@ table.movies p {
 }
 /* Movie Info Page */
 .movieInfo {
-	background-color: bisque;
+	float:left;
+	width: 40%;
+}
+
+figure.moviePoster {
+	float:left;
+	width: auto;
+	margin: 0px;
+	margin-right: 10px;
+	padding: 0px;
+}
+
+figure.moviePoster img {
+	height: 400px;
 }
 
 /* Footer */
 
 footer {
 	background-color: #F0F0F0;
+	position: fixed;
 	padding: 5px;
 	margin-top: 15px;
 	bottom: 0;
