@@ -129,6 +129,10 @@ table.movies p {
 .form-error text {
 	color: black;
 }
+/* Movie Info Page */
+.movieInfo {
+	background-color: bisque;
+}
 
 /* Footer */
 

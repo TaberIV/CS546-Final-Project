@@ -1,4 +1,48 @@
 <article class="moviePage">
   <h2>{{movie.title}}</h2>
-  <img src={{movie.poster}}>
+  <figure class="moviePoster">
+    <img src={{movie.poster}}>
+    <figcaption class="caption">Rating:</figcaption>
+  </figure>
+  
+  <table class="movieInfo">
+    <tr>
+      <td>Release Date:</td>
+      <td>{{movie.releaseDate}}</td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>{{movie.description}}</td>
+    </tr>
+    <tr>
+      <td>Cast:</td>
+      <td>
+        <ul>
+          {{#each movie.cast}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Genre(s):</td>
+      <td>
+        <ul>
+          {{#each movie.genres}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Where to Watch:</td>
+      {{#if movie.inTheaters}}
+        <td>In Theaters Now</td>
+      {{else}}
+        {{#each movie.streamPlatforms}}
+          <td>{{this}}</td>
+        {{/each}}
+      {{/if}}
+    </tr>
+  </table>
 </article>
