@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 	} catch (e) {
 		error_message = "Empty username/password."
 	}
-
+	
 	if (userCreated) {
 		// Create cookie
 		let sID = uuid();
