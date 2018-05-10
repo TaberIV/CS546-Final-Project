@@ -135,6 +135,15 @@ table.movies p {
 	width: 40%;
 }
 
+.movieInfo tr {
+	text-align: left;
+}
+
+.caption {
+	text-align: center;
+	font-weight: bold;
+	font-size: 14pt;
+}
 figure.moviePoster {
 	float:left;
 	width: auto;
