@@ -82,7 +82,7 @@ router.post("/createReview", async (req, res) => {
 			let data = { error: e };
 		}
 
-		res.redirect("/movies/" + movieID);
+		res.redirect("/movies/" + movieID, data);
 	} else {
 		noUserError(res);
 	}
