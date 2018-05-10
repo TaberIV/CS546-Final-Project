@@ -4,8 +4,8 @@ const userData = require("../data/users");
 
 router.get("/", async (req, res) => {
 	const AuthCookie = req.cookies.AuthCookie;
-	var user = await userData.getUserBySessionID(AuthCookie);
-
+	let user = await userData.getUserBySessionID(AuthCookie);
+	
 	if (user) {
 		data = {
 			user,
@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 
 		res.render("account", data);
 	} else {
-		var errorNum = 403;
-		var data = {
+		let errorNum = 403;
+		let data = {
 			errorNum: errorNum,
 			description: "User is not logged in."
 		}

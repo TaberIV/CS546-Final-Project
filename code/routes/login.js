@@ -5,7 +5,7 @@ const uuid = require('uuid/v4');
 
 router.get("/", async (req, res) => {
 	const AuthCookie = req.cookies.AuthCookie;
-	var user;
+	let user;
 	try {
 		user = await userData.getUserBySessionID(AuthCookie);
 	} catch (e) {
@@ -24,8 +24,9 @@ router.post("/", async (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 
-	var error_message = "Incorrect username/password."
-	var user = undefined;
+	let error_message = "Incorrect username/password."
+	let user = undefined;
+
 	try {
 		user = await userData.loginUser(username, password);
 	} catch (e) {
@@ -34,13 +35,13 @@ router.post("/", async (req, res) => {
 
 	if (user) {
 		// Create cookie
-		var sID = uuid();
+		let sID = uuid();
 		res.cookie("AuthCookie", sID);
 		userData.addUserSessionID(user.username, sID);
 
 		res.redirect("/account");
 	} else {
-		var data = {
+		let data = {
 			error: error_message
 		}
 		res.render("login", data);

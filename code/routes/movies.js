@@ -7,15 +7,14 @@ router.get("/:id", async (req, res) => {
 	try {
 		let id = req.params.id;
 		let movie = await movieData.getMovieByID(id);
-		var data = {
+		let data = {
 			movie
 		};
 
 		res.render("movie", data);
 	} catch (e) {
-		console.log(e);
-		var errorNum = 404;
-		var data = {
+		let errorNum = 404;
+		let data = {
 			errorNum: errorNum,
 			description: "the movie is not in the database"
 		}

@@ -52,9 +52,7 @@ async function getMovieByID(_id) {
 async function getInTheaters() {
 	try {
 		let movieCollection = await movies();
-		let movieList = await (await movieCollection.find({
-			inTheaters: true
-		}).toArray());
+		let movieList = await (await movieCollection.find({ inTheaters: true }).toArray());
 
 		return movieList;
 	} catch (e) {
@@ -64,16 +62,16 @@ async function getInTheaters() {
 
 //Gets the number of top rated movies as an array
 async function getTopMovies(numMovies) {
-	var topMovies = [];
-	for (var i = 0; i < movieArray.length; i++) {
+	let topMovies = [];
+	for (let i = 0; i < movieArray.length; i++) {
 		if (topMovies.length === 0) {
 			topMovies.push(movieArray[i]);
 		}
 	}
 
-	var rating = getAverageRating(movieArray[i]);
+	let rating = getAverageRating(movieArray[i]);
 	if (topMovies.length < numMovies || rating > topMovies[numMovies - 1]) {
-		for (var j = 0; j < topMovies.length; j++) {
+		for (let j = 0; j < topMovies.length; j++) {
 			if (rating < getAverageRating(topMovies[j])) {
 				topMovies.splice(j, 0, movieArray[i]);
 				break;
