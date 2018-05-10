@@ -1,0 +1,72 @@
+{{#if error}}
+<div id="form-error" class="error">
+  <h3>Error:</h3>
+  {{ error }}
+</div>
+{{/if}}
+
+
+<form id="creation-form" action="/account/createMovie" method="post">
+  <table>
+    <tr>
+      <td><label for="movieTitle">Title:</label></td>
+      <td><input type="text" name="movieTitle" id="movieTitle"></td>
+    </tr>
+
+    <tr>
+      <td><label for="releaseDate">ReleaseDate:</label></td>
+      <td><input type="date" name="releaseDate" id="releaseDate"></td>
+    </tr>
+
+    <tr>
+      <td><label for="director">Director:</label></td>
+      <td><input type="text" name="director" id="director"></td>
+    </tr>
+
+    <tr>
+      <td><label for="cast">Cast:</label></td>
+      <td><textarea name="cast" form="creation-form" id="cast"></textarea></td>
+    </tr>
+
+    <tr>
+      <td><label for="description">Description:</label></td>
+      <td><input type="text" name="description" id="description"></td>
+    </tr>
+
+    <tr>
+      <td><label for="genre">Genre(s):</label></td>
+      <td>
+        <select multiple name="genre">
+          <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Animated">Animated</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Documentary">Documentary</option>
+          <option value="Drama">Drama</option>
+          <option value="Family Friendly">Family Friendly</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Horror">Horror</option>
+          <option value="Musical">Musical</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Romance">Romance</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="Western">Western</option>
+      </td>
+    </tr>
+
+     <tr>
+      <td>Where to Watch:</td>
+    </tr>
+    <tr>
+      <td><input type = "checkbox" name="inTheaters" value="inTheaters">In Theaters</td>
+      <td><input type = "checkbox" name="AmazonPrimeVideo" value="AmazonPrimeVideo">Amazon Prime Video</td>
+      <td><input type = "checkbox" name="Hulu" value="Hulu">Hulu</td>
+      <td><input type = "checkbox" name="Netflix" value="Netflix">Netflix</td>
+    </tr>
+
+
+    <tr>
+      <td><input type="submit" value="Submit Movie"></td>
+    </tr>
+  </table>
+</form>
