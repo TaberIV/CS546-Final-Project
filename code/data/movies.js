@@ -3,24 +3,53 @@ const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
 const uuid = require("uuid");
 
-async function addMovie(title, inTheaters, cast, description, genres, poster) {
+async function addMovie(title, releaseDate, director, inTheaters, AmazonPrimeVideo, Hulu, Netflix, cast, description, genres, poster) {
 	try {
 		if (!title || title.trim() == "")
 			throw "Must provide a movie title";
+		else if (!releaseDate || releaseDate.trim() == "")
+			throw "Must provide a release date";
+		else if (!director || director.trim() == "")
+			throw "Must provide a director";
+
 		else if (!cast || cast.trim() == "")
 			throw "Must provide cast";
 		else if (!description || description.trim() == "")
 			throw "Must provide a description";
-		else if (!genres || genres.trim() == "")
+		else if (!genres)
 			throw "Must provide genres";
 		else if (!poster || poster.trim() == "")
 			throw "Must provide a poster";
 
+		if(!Array.isArray(genres)){
+			genres = [genres];
+		}
+		cast = cast.split("\n");
+
+		let whereToWatch = [];
+		if(inTheaters == true){
+			whereToWatch.push("In Theaters");
+		}
+		if(AmazonPrimeVideo == true){
+			whereToWatch.push("Amazon Prime Video");
+		}
+		if(Hulu == true){
+			whereToWatch.push("Hulu");
+		}
+		if(Netflix == true){
+			whereToWatch.push("Netflix");
+		}
+		if(!whereToWatch.length){
+			whereToWatch.push("Unavailable");
+		}
 		let movieCollection = await movies();
 		let newMovie = {
 			_id: uuid.v4(),
 			title: title,
+			releaseDate: releaseDate,
+			director: director,
 			inTheaters: inTheaters,
+			whereToWatch: whereToWatch,
 			cast: cast,
 			description: description,
 			genres: genres,

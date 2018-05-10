@@ -31,9 +31,35 @@ router.get("/createMovie", async (req, res) => {
 router.post("/createMovie", async (req, res) => {
 
 	try {
-		//console.log(req.params);
-		let id = await movieData.addMovie(req.body.movieTitle, true, req.body.cast, req.body.description, req.body.genre, "/images/donovan.jpg");
-		console.log(id);
+		let title = req.body.movieTitle;
+		let releaseDate = req.body.releaseDate;
+		let director = req.body.director;
+		let inTheaters = false;
+		let AmazonPrimeVideo = false;
+		let Hulu = false;
+		let Netflix = false;
+		if(req.body.inTheaters == "inTheaters"){
+			inTheaters = true;
+		}
+		
+		if(req.body.AmazonPrimeVideo == "AmazonPrimeVideo"){
+			AmazonPrimeVideo = true;
+		}
+		
+		if(req.body.Hulu == "Hulu"){
+			Hulu = true;
+		}
+		
+		if(req.body.Netflix == "Netflix"){
+			Netflix = true;
+		}
+		
+		console.log(req.body.inTheaters);
+		let cast = req.body.cast;
+		let description = req.body.description;
+		let genre = req.body.genre;
+		let poster = "/images/donovan.jpg"
+		let id = await movieData.addMovie(title, releaseDate, director, inTheaters, AmazonPrimeVideo, Hulu, Netflix, cast, description, genre, poster);
 		res.redirect("/movies/"+id);
 	} catch(e) {
 		var data = {
