@@ -1,17 +1,15 @@
 <h2>In Theaters:</h2>
-<table class="movies">
-  <tr>
-    {{#each inTheaters}}
-    <td>
+<section class="movies">
+  {{#each inTheaters}}
+    <article>
       <a href="/movies/{{this._id}}" class="title">
         <h3>{{this.title}}</h3>
         <img src={{this.poster}}>
       </a>
-      <h3>{{this.releaseDate}}</h3>
-      <p>{{this.description}}</p>
-    </td>
-    {{else}}
-      <td>There's nothing in theaters</td>
-    {{/each}}
-  </tr>
-</table>
+      <p class="releaseDate">{{this.releaseDate}}</p>
+      <p class="description">{{this.description}}</p>
+    </article>
+  {{else}}
+    <p>There's nothing in theaters</p>
+  {{/each}}
+</section>

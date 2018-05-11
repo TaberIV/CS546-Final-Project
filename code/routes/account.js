@@ -28,7 +28,6 @@ router.get("/", async (req, res) => {
 			if (reviews[i].rating == 4)
 				favorites.push(reviews[i].movie);
 		}
-		console.log(favorites);
 
 		data = {
 			user,
