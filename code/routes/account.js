@@ -44,10 +44,7 @@ router.get("/", async (req, res) => {
 router.get("/createMovie", async (req, res) => {
 	let user = await getUserFromCookie(req);
 
-	if (user)
-		res.render("movieCreation", { user });
-	else
-		res.render("movieCreation", data);
+	res.render("movieCreation", { user });
 });
 
 router.post("/createMovie", async (req, res) => {
@@ -58,9 +55,9 @@ router.post("/createMovie", async (req, res) => {
 		movieInfo.poster = "/images/placeholder.jpg";
 		try {
 			let id = await movieData.addMovie(movieInfo);
-			res.redirect("/movies/"+id);
+			res.redirect("/movies/" + id);
 		} catch(e) {
-			let data = { error: e };
+			let data = { user, error: e };
 			res.render("movieCreation", data);
 		}
 	} else {
