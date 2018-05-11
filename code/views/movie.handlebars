@@ -54,52 +54,64 @@
   </table>
 </article>
 
-<article class="reviewsSection">
+<section class="reviews">
   <header>
     <h3>Reviews:</h3>
   </header>
 
   {{#if user}}
-    <h4>Add a review: </h4>
-    <form id="reviewCreation-form" action="/account/createReview" method="POST">
-      <label for="1">1</label>
-      <input type="radio" id="1" name="rating" value="1">
-      <label for="2">2</label>
-      <input type="radio" id="2" name="rating" value="2">
-      <label for="3">3</label>
-      <input type="radio" id="3" name="rating" value="3">
-      <label for="4">4</label>
-      <input type="radio" id="4" name="rating" value="4">
-      <br>
+  <h4>Add a review: </h4>
+  <form id="reviewCreation-form" action="/account/createReview" method="POST">
+    <label for="1">1</label>
+    <input type="radio" id="1" name="rating" value="1">
+    <label for="2">2</label>
+    <input type="radio" id="2" name="rating" value="2">
+    <label for="3">3</label>
+    <input type="radio" id="3" name="rating" value="3">
+    <label for="4">4</label>
+    <input type="radio" id="4" name="rating" value="4">
+    <br>
 
-      <textarea name="reviewText"></textarea>
-      <br>
-      <button type="submit">Create Review</button>
-    </form>
+    <textarea name="reviewText"></textarea>
+    <br>
+    <button type="submit">Create Review</button>
+  </form>
   {{else}}
-    <p>
-      <a href="/login">Sign Up/Log In</a> to add a review!
-    </p>
+  <p>
+    <a href="/login">Sign Up/Log In</a> to add a review!
+  </p>
   {{/if}}
-</article>
 
-<aside class="reccomendations">
-  <header>
-    <h3>Recommended Movies: </h3>
-  </header>
-  
-  {{#each recommendedMovies}}
-  <ul>
-    <li>
-      <a href="/movies/{{this._id}}" class="title">
-        <h3>{{this.title}}</h3>
-        <img src={{this.poster}}>
-      </a>
-      <h3>{{this.releaseDate}}</h3>
-      <p>{{this.description}}</p>
-    </li>
-  </ul>
-  {{else}}
-  <td>No Recommendations</td>
-  {{/each}}
-</aside>
+  {{#each reviews}}
+    <article>
+      <h4>{{this.user.username}}</h4>
+      <p>Score: {{this.rating}}/4</p>
+      {{#if this.text}}
+        <p>{{this.text}}</p>
+      {{/if}}
+    </article>
+    {{else}}
+      <p>There are no reviews for this movie yet.</p>
+    {{/each}}
+</section>
+
+  <aside class="reccomendations">
+    <header>
+      <h3>Recommended Movies: </h3>
+    </header>
+
+    {{#each recommendedMovies}}
+    <ul>
+      <li>
+        <a href="/movies/{{this._id}}" class="title">
+          <h3>{{this.title}}</h3>
+          <img src={{this.poster}}>
+        </a>
+        <h3>{{this.releaseDate}}</h3>
+        <p>{{this.description}}</p>
+      </li>
+    </ul>
+    {{else}}
+    <td>No Recommendations</td>
+    {{/each}}
+  </aside>
