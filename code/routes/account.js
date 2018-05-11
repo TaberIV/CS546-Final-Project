@@ -5,6 +5,7 @@ const movieData = require("../data/movies");
 const reviewData = require("../data/reviews");
 const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
+
 function noUserError(res) {
 	let errorNum = 403;
 
@@ -55,8 +56,7 @@ router.post("/createMovie", async (req, res) => {
 
 	if (user) {
 		let movieInfo = req.body;
-		movieInfo.poster = "/images/donovan.jpg";
-
+		movieInfo.poster = "/images/placeholder.jpg";
 		try {
 			let id = await movieData.addMovie(movieInfo);
 			res.redirect("/movies/"+id);
