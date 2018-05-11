@@ -36,7 +36,7 @@
     <tr>
       <td><label for="genre">Genre(s):</label></td>
       <td>
-        <select multiple name="genre">
+        <select multiple name="genre" id="genre">
           <option value="Action">Action</option>
           <option value="Adventure">Adventure</option>
           <option value="Animated">Animated</option>
@@ -57,16 +57,13 @@
 
      <tr>
       <td>Where to Watch:</td>
-    </tr>
-    <tr>
-      <td><input type = "checkbox" name="inTheaters" value="inTheaters">In Theaters</td>
-      <td><input type = "checkbox" name="AmazonPrimeVideo" value="AmazonPrimeVideo">Amazon Prime Video</td>
-      <td><input type = "checkbox" name="Hulu" value="Hulu">Hulu</td>
-      <td><input type = "checkbox" name="Netflix" value="Netflix">Netflix</td>
-    </tr>
-
-    <tr>
-      <td><input type="submit" value="Submit Movie"></td>
+      <td>
+        <input type = "checkbox" name="inTheaters" value="inTheaters">In Theaters<br>
+        <input type = "checkbox" name="AmazonPrimeVideo" value="AmazonPrimeVideo">Amazon Prime Video<br>
+        <input type = "checkbox" name="Hulu" value="Hulu">Hulu<br>
+        <input type = "checkbox" name="Netflix" value="Netflix">Netflix<br>
+      </td>
     </tr>
   </table>
+  <input type="submit" value="Submit Movie">
 </form>
