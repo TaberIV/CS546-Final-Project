@@ -23,9 +23,9 @@ async function addReview(reviewInfo) {
     return newReview._id;
 }
 
-async function getReviewsByMovie(movieID) {
+async function getReviewsByMovie(movie) {
     let reviewCollection = await reviews();
-    let reviewList = await reviewCollection.find({ movie: movieID }).toArray()
+    let reviewList = await reviewCollection.find({ movie }).toArray()
 
     for (let i = 0; i < reviewList.length; i++) {
         let user = await userData.getUserByID(reviewList[i].user);
@@ -35,22 +35,26 @@ async function getReviewsByMovie(movieID) {
     return reviewList;
 }
 
-async function getAverageRating(movieID) {
+async function getAverageRating(movie) {
     let reviewCollection = await reviews();
-    let scores = await reviewCollection.find({ movie: movieID }, {_id: 0, rating: 1}).toArray();
+    let scores = await reviewCollection.find({ movie }).toArray();
     
     let average = 0;
     let i = 0
     for (i = 0; i < scores.length; i++)
         average += scores[i].rating;
-    average /= i;
+
+    if (i > 0)
+        average /= i;
+    else
+        average = "-";
 
     return average;
 }
 
-async function getReviewsByUser(userID) {
+async function getReviewsByUser(user) {
     let reviewCollection = await mongoCollections.reviews();
-    let reviewList = await reviewCollection.find({ user: userID }).toArray();
+    let reviewList = await reviewCollection.find({ user }).toArray();
 
     for (let i = 0; i < reviewList.length; i++) {
         let movie = await movieData.getMovieByID(reviewList[i].movie);
@@ -60,9 +64,28 @@ async function getReviewsByUser(userID) {
     return reviewList;
 }
 
+async function getReview(user, movie) {
+    let reviewCollection = await mongoCollections.reviews();
+    let review = await reviewCollection.findOne({ user, movie });
+
+    return review;
+}
+
+async function updateReview(review, reviewInfo) {
+    let reviewCollection = await mongoCollections.reviews();
+    review.rating = Number(reviewInfo.rating);
+    review.text = reviewInfo.reviewText;
+
+    await reviewCollection.update({ _id: review._id }, review);
+    let result = await reviewCollection.findOne({ _id });
+    console.log(result);
+}
+
 module.exports = {
     addReview,
     getReviewsByMovie,
     getAverageRating,
-    getReviewsByUser
+    getReviewsByUser,
+    getReview,
+    updateReview
 };

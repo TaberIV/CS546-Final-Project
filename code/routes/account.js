@@ -3,6 +3,7 @@ const router = express.Router();
 const userData = require("../data/users");
 const movieData = require("../data/movies");
 const reviewData = require("../data/reviews");
+const fs = require("fs");
 const { getUserFromCookie } = require("../public/js/cookieFunctions");
 
 
@@ -52,7 +53,23 @@ router.post("/createMovie", async (req, res) => {
 
 	if (user) {
 		let movieInfo = req.body;
-		movieInfo.poster = "/images/placeholder.jpg";
+
+		// Sets the image
+		const public = "public";
+		const posterFolder = "/images/MoviePosters/";
+		let posterName = movieInfo.movieTitle.replace(/\s/g, '');
+		const posterExtension = "Poster.jpg";
+		
+		try {
+			fs.accessSync(public + posterFolder + posterName + posterExtension);
+		} catch (e) {
+			console.log(e);
+			posterName = "placeholder";
+		}
+		
+		movieInfo.poster = posterFolder + posterName + posterExtension;
+		
+		// Send movie to database;
 		try {
 			let id = await movieData.addMovie(movieInfo);
 			res.redirect("/movies/" + id);
@@ -78,16 +95,26 @@ router.post("/createReview", async (req, res) => {
 
 	// Create review and refesh page
 	if (user) {
-		let reviewInfo = req.body;
-		reviewInfo.movie = movieID;
-		reviewInfo.userID = user._id;
+		let existingReview = await reviewData.getReview(user._id, movieID);
 
-		let data = {};
-		try {
-			let id = await reviewData.addReview(reviewInfo);
-			res.redirect("/movies/" + movieID);
-		} catch(e) {
-			res.redirect("/movies/" + movieID);
+		if (existingReview) {
+			try {
+				let id = await reviewData.updateReview(existingReview, req.body);
+				res.redirect("/movies/" + movieID);
+			} catch(e) {
+				res.redirect("/movies/" + movieID);
+			}
+		} else {
+			let reviewInfo = req.body;
+			reviewInfo.movie = movieID;
+			reviewInfo.userID = user._id;
+
+			try {
+				let id = await reviewData.addReview(reviewInfo);
+				res.redirect("/movies/" + movieID);
+			} catch(e) {
+				res.redirect("/movies/" + movieID);
+			}
 		}
 	} else {
 		noUserError(res);

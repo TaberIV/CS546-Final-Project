@@ -1,102 +1,104 @@
-<section class="movieInfo">
-  <header>
-    <h2>{{movie.title}}</h2>
-  </header>
+<div class="moviePage">
+  <section class="movieInfo">
+    <header>
+      <h2>{{movie.title}}</h2>
+    </header>
 
-  <figure class="moviePoster">
-    <img src={{movie.poster}} alt="{{title}}">
-    <figcaption>Rating: {{movie.averageRating}}</figcaption>
-  </figure>
+    <figure>
+      <img src={{movie.poster}} alt="{{title}}">
+      <figcaption>Rating: {{movie.averageRating}}</figcaption>
+    </figure>
 
-  <table class="movieInfo">
-    <tr>
-      <td>Release Date:</td>
-      <td>{{movie.releaseDate}}</td>
-    </tr>
-    <tr>
-      <td>Description:</td>
-      <td>{{movie.description}}</td>
-    </tr>
-    <tr>
-      <td>Director:</td>
-      <td>{{movie.director}}</td>
-    </tr>
-    <tr>
-      <td>Cast:</td>
-      <td>
-        <ul>
-          {{#each movie.cast}}
-            <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Genre(s):</td>
-      <td>
-        <ul>
-          {{#each movie.genres}}
-            <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Where to Watch:</td>
-      <td>
-        <ul>
-          {{#each movie.whereToWatch}}
-            <li>{{this}} </li>
-          {{/each}}
-        </ul>
-      </td>
-    </tr>
-  </table>
-</section>
+    <table class="movieInfo">
+      <tr>
+        <td>Release Date:</td>
+        <td>{{movie.releaseDate}}</td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{movie.description}}</td>
+      </tr>
+      <tr>
+        <td>Director:</td>
+        <td>{{movie.director}}</td>
+      </tr>
+      <tr>
+        <td>Cast:</td>
+        <td>
+          <ul>
+            {{#each movie.cast}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Genre(s):</td>
+        <td>
+          <ul>
+            {{#each movie.genres}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Where to Watch:</td>
+        <td>
+          <ul>
+            {{#each movie.whereToWatch}}
+              <li>{{this}} </li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </section>
 
-<section class="reviews">
-  <header>
-    <h3>Reviews:</h3>
-  </header>
+  <section class="reviews">
+    <header>
+      <h3>Reviews:</h3>
+    </header>
 
-  {{#if user}}
-    <h4>Add a review:</h4>
-    <form id="reviewCreation-form" action="/account/createReview" method="POST">
-      <label for="1">1</label>
-      <input type="radio" id="1" name="rating" value="1">
-      <label for="2">2</label>
-      <input type="radio" id="2" name="rating" value="2">
-      <label for="3">3</label>
-      <input type="radio" id="3" name="rating" value="3">
-      <label for="4">4</label>
-      <input type="radio" id="4" name="rating" value="4">
-      <br>
+    {{#if user}}
+      <h4>Add a review:</h4>
+      <form id="reviewCreation-form" action="/account/createReview" method="POST">
+        <label for="1">1</label>
+        <input type="radio" id="1" name="rating" value="1">
+        <label for="2">2</label>
+        <input type="radio" id="2" name="rating" value="2">
+        <label for="3">3</label>
+        <input type="radio" id="3" name="rating" value="3">
+        <label for="4">4</label>
+        <input type="radio" id="4" name="rating" value="4">
+        <br>
 
-      <textarea name="reviewText"></textarea>
-      <br>
-      <button type="submit">Create Review</button>
-  </form>
-  {{else}}
-    <p>
-      <a href="/login">Sign Up/Log In</a> to add a review!
-    </p>
-  {{/if}}
-
-  <div>
-    {{#each reviews}}
-      <article>
-        <h4>{{this.user.username}}'s Review: {{this.rating}}/4</h4>
-        {{#if this.text}}
-          <p>{{this.text}}</p>
-        {{/if}}
-      </article>
+        <textarea name="reviewText"></textarea>
+        <br>
+        <button type="submit">Create Review</button>
+    </form>
     {{else}}
-      <p>There are no reviews for this movie yet.</p>
-    {{/each}}
-  </div>
-</section>
+      <p>
+        <a href="/login">Sign Up/Log In</a> to add a review!
+      </p>
+    {{/if}}
 
-<section class="movies">
+    <div>
+      {{#each reviews}}
+        <article>
+          <h4>{{this.user.username}}'s Review: {{this.rating}}/4</h4>
+          {{#if this.text}}
+            <p>{{this.text}}</p>
+          {{/if}}
+        </article>
+      {{else}}
+        <p>There are no reviews for this movie yet.</p>
+      {{/each}}
+    </div>
+  </section>
+</div>
+
+<aside class="movies">
   <header>
     <h3>Related Movies: </h3>
   </header>
@@ -109,10 +111,10 @@
           <img src={{this.poster}}>
         </a>
         <p class="releaseDate">{{this.releaseDate}}</p>
-        <p class="description">{{this.description}}</p>
       </article>
+      <br>
     {{else}}
       <p>No related movies.</p>
     {{/each}}
   </div>
-</section>
+</aside>

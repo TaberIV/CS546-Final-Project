@@ -17,7 +17,7 @@
   {{/each}}
 </section>
 
-<section class="movies">
+<aside class="movies">
   <h3>Your Favorites:</h3>
 
   <div>
@@ -28,10 +28,10 @@
           <img src={{this.poster}} alt="{{this.title}}">
         </a>
         <p class="releaseDate">{{this.releaseDate}}</p>
-        <p class="description">{{this.description}}</p>
       </article>
+      <br>
     {{else}}
       <p>You haven't rated any movies as 4 stars.</p>
     {{/each}}
   </div>
-</section>
+</aside>

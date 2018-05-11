@@ -67,59 +67,106 @@ p {
   line-height: 1.5;
 }
 
-form {
-  font-size: 14pt;
-}
+/* Movie Lists */
 
-/* Movies */
-
-section.movies div {
-  background-color: #e0e0e0;
+.movies div {
+  background-color: #ebebeb;
   margin: 10px;
   width: 100%;
+  white-space: nowrap;
   overflow-x: scroll;
   display: block;
 }
 
-section.movies article {
+.movies article {
   width: auto;
-  padding-left: 10px;
+  display: inline-block;
+  padding: 10px;
 }
 
-section.movies img {
+.movies img {
   height: 250px;
 }
 
 p.releaseDate {
   font-size: 16pt;
   font-weight: bold;
+  margin: 0;
 }
 
 p.description {
   margin-top: 0px;
   margin-bottom: 10px;
+  width: 175px;
+  height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: normal;
 }
 
 /* Movie Info Page */
 
-figure.moviePoster {
-  margin: 0px;
-  margin-right: 10px;
-  padding: 0px;
+div.moviePage {
+  width: fit-content;
+  display: inline-block;
 }
 
-figure.moviePoster img {
-  height: 400px;
+section.movieInfo figure {
+  display: inline-block;
+  width: fit-content;
+  margin: 10px;
 }
 
-figure.moviePoster figcaption {
+section.movieInfo figure img {
+  max-height: 400px;
+  max-width: 300px;
+}
+
+section.movieInfo figure figcaption {
   font-weight: bold;
   font-size: 14pt;
 }
 
-/* Form Error Box */
+section.movieInfo table {
+  display: inline-block;
+  width: 400px;
+  vertical-align: top;
+  margin: 10px;
+}
+
+section.reviews {
+  display: inline-block;
+  padding: 10px;
+  border: #333 solid 5px;
+  width: fit-content;
+  min-width: 50%;
+}
+
+section.reviews article {
+  display: block;
+  background: #e0e0e0;
+  width: fit-content;
+  max-width: 700px;
+}
+
+aside.movies {
+  display: block;
+  width: fit-content;
+  height: 100%;
+  float: right;
+}
+
+aside.movies div {
+  white-space: normal;
+  height: 1000px;
+  overflow-y: scroll;
+}
+
+/* Form */
+
+form {
+  font-size: 14pt;
+}
 
 .form-error {
   border-radius: 25px;
