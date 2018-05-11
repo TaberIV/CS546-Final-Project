@@ -82,7 +82,6 @@ async function searchMovies(searchInfo) {
 
 		searchInfo = searchInfo.toLowerCase();
 		let regEx = new RegExp('.*' + searchInfo + '.*', 'i');
-		console.log(regEx);
 		let movieCollection = await movies();
 		let searchResults = await movieCollection.find(
 		{
@@ -141,7 +140,7 @@ async function getRecommendedMovies(movieID) {
 			genreIntersection = element.genres.filter(function (n) {
 				return currentMovie.genres.indexOf(n) !== -1;
 			});
-			if (genreIntersection.length > 0 && element.title !== currentMovie.title) {
+			if (genreIntersection.length > 0 && element.title !== currentMovie.title && recommendedMovies.length < 4) {
 				recommendedMovies.push(element);
 			}
 			//If greater than 1, recommend it
