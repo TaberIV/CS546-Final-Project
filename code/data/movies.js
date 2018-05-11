@@ -82,7 +82,7 @@ async function searchMovies(searchInfo) {
 
 		searchInfo = searchInfo.toLowerCase();
 		let regEx = new RegExp('.*' + searchInfo + '.*', 'i');
-<<
+
 		let movieCollection = await movies();
 		let searchResults = await movieCollection.find(
 		{
