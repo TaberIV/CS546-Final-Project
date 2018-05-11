@@ -74,15 +74,15 @@ router.post("/createReview", async (req, res) => {
 	if (user) {
 		let reviewInfo = req.body;
 		reviewInfo.movie = movieID;
-		reviewInfo.user = user._id;
+		reviewInfo.user = user;
 
+		let data = {};
 		try {
 			let id = await reviewData.addReview(reviewInfo);
+			res.redirect("/movies/" + movieID);
 		} catch(e) {
-			let data = { error: e };
+			res.redirect("/movies/" + movieID);
 		}
-
-		res.redirect("/movies/" + movieID);
 	} else {
 		noUserError(res);
 	}

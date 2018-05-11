@@ -1,7 +1,7 @@
 const mongodb = require("mongodb");
 const mongoCollections = require("../config/mongoCollections");
 const movies = mongoCollections.movies;
-const uuid = require("uuid");
+const uuid = require("uuid/v4");
 
 async function addMovie(movieInfo) {
 	// Ensure all required info is present
@@ -41,7 +41,7 @@ async function addMovie(movieInfo) {
 		whereToWatch.push("Unavailable");
 
 	let newMovie = {
-		_id: uuid.v4(),
+		_id: uuid(),
 		title: movieInfo.movieTitle,
 		releaseDate: movieInfo.releaseDate,
 		director: movieInfo.director,
@@ -82,12 +82,13 @@ async function searchMovies(searchInfo) {
 
 		searchInfo = searchInfo.toLowerCase();
 		let regEx = new RegExp('.*' + searchInfo + '.*', 'i');
+<<
 		let movieCollection = await movies();
 		let searchResults = await movieCollection.find(
 		{
 			title: regEx
 		}).toArray();
-		//console.log(searchResults);
+
 		return searchResults;
 	} catch (e) {
 		throw e;

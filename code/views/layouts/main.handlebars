@@ -23,7 +23,8 @@
         </td>
         <td>
           {{#if user}}
-            <a href="/account" class="account">{{user.username}}</a>
+            <a href="/account" class="account">{{user.username}}</a> |
+            <a href="/logout">Not you? Logout.</a>
           {{else}}
             <a href="/login" class="account">Sign Up/Log In</a>
           {{/if}}
