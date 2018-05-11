@@ -13,9 +13,9 @@ body {
 	margin-right: auto;
 }
 
-/* Header */
+/* nav bar */
 
-header table {
+nav {
 	padding: 5px;
 	background-color: #FFE57F;
 	border: 5px;
@@ -23,16 +23,13 @@ header table {
 	width: 100%;
 }
 
+nav p {
+	padding: 0px;
+	margin: 0px;
+}
+
 table.align-out {
 	width: 100%
-}
-
-.align-out td:nth-child(odd) {
-	text-align: left;
-}
-
-.align-out td:nth-child(even) {
-	text-align: right;
 }
 
 /* Headings */

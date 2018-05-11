@@ -1,4 +1,31 @@
-<article class="user-info">
+<header>
   <h2>{{user.username}}</h2>
-  
-</article>
+</header>
+
+<section class="reviews">
+  <h3>Your Reviews:</h3>
+  {{#each reviews}}
+    <article>
+      <h4>{{this.movie.title}}: {{this.rating}}/4</h4>
+      {{#if this.text}}
+        <p>{{this.text}}</p>
+      {{/if}}
+    </article>
+  {{else}}
+    <p>You haven't writen any reviews.</p>
+  {{/each}}
+</section>
+
+<section class="movies">
+  <h3>Your Favorites:</h3>
+  {{#each favorites}}
+    <article>
+      <h4>{{this.title}}</h4>
+      {{#if this.text}}
+        <p>{{this.text}}</p>
+      {{/if}}
+    </article>
+  {{else}}
+    <p>You haven't rated any movies as 4 stars.</p>
+  {{/each}}
+</section>

@@ -20,9 +20,19 @@ router.get("/", async (req, res) => {
 	let user = await getUserFromCookie(req);
 	
 	if (user) {
+		reviews = await reviewData.getReviewsByUser(user._id);
+
+		favorites = [];
+		for (let i = 0; i < reviews.length; i++) {
+			if (reviews[i].rating == 4)
+				favorites.push(reviews[i].movie);
+		}
+		console.log(favorites);
+
 		data = {
 			user,
-			title: "User Info",
+			reviews,
+			favorites
 		}
 
 		res.render("account", data);
@@ -74,7 +84,7 @@ router.post("/createReview", async (req, res) => {
 	if (user) {
 		let reviewInfo = req.body;
 		reviewInfo.movie = movieID;
-		reviewInfo.user = user;
+		reviewInfo.userID = user._id;
 
 		let data = {};
 		try {

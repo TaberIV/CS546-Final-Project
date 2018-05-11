@@ -1,4 +1,4 @@
-<article class="movieInfo">
+<section class="movieInfo">
   <header>
     <h2>{{movie.title}}</h2>
   </header>
@@ -52,7 +52,7 @@
       </td>
     </tr>
   </table>
-</article>
+</section>
 
 <section class="reviews">
   <header>
@@ -60,7 +60,7 @@
   </header>
 
   {{#if user}}
-  <h4>Add a review: </h4>
+  <h4>Add a review:</h4>
   <form id="reviewCreation-form" action="/account/createReview" method="POST">
     <label for="1">1</label>
     <input type="radio" id="1" name="rating" value="1">
@@ -84,8 +84,7 @@
 
   {{#each reviews}}
     <article>
-      <h4>{{this.user.username}}</h4>
-      <p>Score: {{this.rating}}/4</p>
+      <h4>{{this.user.username}}'s Review: {{this.rating}}/4</h4>
       {{#if this.text}}
         <p>{{this.text}}</p>
       {{/if}}
@@ -97,7 +96,7 @@
 
   <aside class="reccomendations">
     <header>
-      <h3>Recommended Movies: </h3>
+      <h3>Related Movies: </h3>
     </header>
 
     {{#each recommendedMovies}}
@@ -112,6 +111,6 @@
       </li>
     </ul>
     {{else}}
-    <td>No Recommendations</td>
+    <td>No Related Movies</td>
     {{/each}}
   </aside>

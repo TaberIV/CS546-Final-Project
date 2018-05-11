@@ -1,6 +1,8 @@
 const mongodb = require("mongodb");
 const mongoCollections = require("../config/mongoCollections");
 const reviews = mongoCollections.reviews;
+const userData = require("../data/users");
+const movieData = require("../data/movies");
 const uuid = require('uuid/v4');
 
 async function addReview(reviewInfo) {
@@ -10,7 +12,7 @@ async function addReview(reviewInfo) {
     let newReview = {
         _id: uuid(),
         movie: reviewInfo.movie,
-        user: reviewInfo.user,
+        user: reviewInfo.userID,
         rating: Number(reviewInfo.rating),
         text: reviewInfo.reviewText
     };
@@ -23,7 +25,14 @@ async function addReview(reviewInfo) {
 
 async function getReviewsByMovie(movieID) {
     let reviewCollection = await reviews();
-    return (await reviewCollection.find({ movie: movieID })).toArray();
+    let reviewList = await reviewCollection.find({ movie: movieID }).toArray()
+
+    for (let i = 0; i < reviewList.length; i++) {
+        let user = await userData.getUserByID(reviewList[i].user);
+        reviewList[i].user = user;
+    }
+
+    return reviewList;
 }
 
 async function getAverageRating(movieID) {
@@ -40,8 +49,15 @@ async function getAverageRating(movieID) {
 }
 
 async function getReviewsByUser(userID) {
-    let reviewCollection = await reviews();
-    return (await reviewCollection.find({ user: userID })).toArray();
+    let reviewCollection = await mongoCollections.reviews();
+    let reviewList = await reviewCollection.find({ user: userID }).toArray();
+
+    for (let i = 0; i < reviewList.length; i++) {
+        let movie = await movieData.getMovieByID(reviewList[i].movie);
+        reviewList[i].movie = movie;
+    }
+
+    return reviewList;
 }
 
 module.exports = {
@@ -49,4 +65,4 @@ module.exports = {
     getReviewsByMovie,
     getAverageRating,
     getReviewsByUser
-}
+};

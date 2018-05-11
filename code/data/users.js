@@ -6,6 +6,16 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+async function getUserByID(_id) {
+	if (!_id || typeof _id != 'string')
+		throw _id;
+	
+	let userCollection = await users();
+
+	let user = await userCollection.findOne({ _id });
+	return user;
+}
+
 async function getUserByUsername(username) {
 	try {
 		if (!username || typeof username != 'string')
@@ -13,7 +23,7 @@ async function getUserByUsername(username) {
 		
 		let userCollection = await users();
 
-		let user = await userCollection.findOne({ username });
+		let user = await userCollection.findOne({ username }, {fields: { hashedpassword: false, sessionIDs: false }});
 		return user;
 	} catch (e) {
 		throw e;
@@ -24,9 +34,10 @@ async function loginUser(username, password) {
 	if (!username || typeof username != 'string' || !password || typeof password != 'string')
 		throw "username and password must be non-empty strings";
 
+	let userCollection = await users();
 	let user = undefined;
 	try {
-		user = await getUserByUsername(username);
+		user = await userCollection.findOne({ username });
 	} catch (e) {
 		return false;
 	}
@@ -54,8 +65,9 @@ async function createUser(username, password) {
 		hashedpassword: hashedpassword,
 		sessionIDs: []
 	};
-	
-	return await userCollection.insert(newUser);
+
+	await userCollection.insert(newUser)
+	return newUser;
 }
 
 //Gets all of the ratings that have been submitted by the user.
@@ -77,14 +89,10 @@ async function getUserBySessionID(sID) {
 	}
 }
 
-async function addUserSessionID(username, sID) {
+async function addUserSessionID(_id, sID) {
 	let userCollection = await users();
-	let currentUser = await getUserByUsername(username);
 
-	const _id = currentUser._id;
-	currentUser.sessionIDs.push(sID);
-
-	await userCollection.update({ _id }, currentUser);
+	return await userCollection.update({ _id }, { $push: { sessionIDs: sID }});
 }
 
 async function expireSessionID(sID) {
@@ -104,6 +112,7 @@ async function expireSessionID(sID) {
 }
 
 module.exports = {
+	getUserByID,
 	getUserByUsername,
 	loginUser,
 	getUserBySessionID,

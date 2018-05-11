@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 		// Create cookie
 		let sID = uuid();
 		res.cookie("AuthCookie", sID);
-		userData.addUserSessionID(username, sID);
+		userData.addUserSessionID(userCreated._id, sID);
 
 		res.redirect("/account");
 	} else {
