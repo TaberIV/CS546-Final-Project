@@ -1,15 +1,20 @@
-<h2>In Theaters:</h2>
 <section class="movies">
-  {{#each inTheaters}}
-    <article>
-      <a href="/movies/{{this._id}}" class="title">
-        <h3>{{this.title}}</h3>
-        <img src={{this.poster}}>
-      </a>
-      <p class="releaseDate">{{this.releaseDate}}</p>
-      <p class="description">{{this.description}}</p>
-    </article>
-  {{else}}
-    <p>There's nothing in theaters</p>
-  {{/each}}
+  <header>
+    <h2>In Theaters:</h2>
+  </header>
+
+  <div>
+    {{#each inTheaters}}
+      <article>
+        <a href="/movies/{{this._id}}" class="title">
+          <h3>{{this.title}}</h3>
+          <img src={{this.poster}} alt="{{this.title}}">
+        </a>
+        <p class="releaseDate">{{this.releaseDate}}</p>
+        <p class="description">{{this.description}}</p>
+      </article>
+    {{else}}
+      <p>There's nothing in theaters</p>
+    {{/each}}
+  </div>
 </section>

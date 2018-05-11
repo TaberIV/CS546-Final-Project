@@ -1,169 +1,142 @@
 /* Document formatting */
 
 html {
-	position: relative;
-	min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-	background: #FEFEFE;
-	font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
+  background: #FEFEFE;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* nav bar */
 
 nav {
-	padding: 5px;
-	background-color: #FFE57F;
-	border: 5px;
-	border-color: #FFC107;
-	width: 100%;
+  padding: 5px;
+  background-color: #FFE57F;
+  border: 5px;
+  border-color: #FFC107;
+  width: 100%;
 }
 
-nav p {
-	padding: 0px;
-	margin: 0px;
+nav form {
+  display: inline-block;
+  margin: 0px;
 }
 
-table.align-out {
-	width: 100%
+nav div.accountLinks {
+  display: block;
+  float: right;
+  padding: 0px;
+  margin: 0px;
 }
 
 /* Headings */
 
 h1, h2, h3, h4, h5, h6 {
-	color: #333;
-	margin-bottom: 5px;
+  color: #333;
+  margin-bottom: 5px;
 }
 
 /* Titles */
 
 a.title:link {
-	color: red;
+  color: red;
 }
 
 a.title:visited {
-	color: red;
+  color: red;
 }
 
 a.title:hover {
-	color: pink;
+  color: pink;
 }
 
 a.title:active {
-	color: purple;
+  color: purple;
 }
 
 /* Body formatting */
 
 p {
-	font-size: 12pt;
-	line-height: 1.5;
+  font-size: 12pt;
+  line-height: 1.5;
 }
 
 form {
-	font-size: 14pt;
+  font-size: 14pt;
 }
 
-/* Homepage */
+/* Movies */
 
-table.homepage {
-	min-width: 100%
+section.movies div {
+  background-color: #e0e0e0;
+  margin: 10px;
+  width: 100%;
+  overflow-x: scroll;
+  display: block;
 }
 
-table.movies {
-	background-color: #e0e0e0;
-	margin: 10px;
-	width: 100%;
-	overflow-x: scroll;
-	display: block;
+section.movies article {
+  width: auto;
+  padding-left: 10px;
 }
 
-table.movies td {
-	min-width: 175px;
-	padding-left: 10px;
+section.movies img {
+  height: 250px;
 }
 
-table.movies img {
-	height: 250px;
+p.releaseDate {
+  font-size: 16pt;
+  font-weight: bold;
 }
 
-table.movies p {
-	margin-top: 0px;
-	margin-bottom: 10px;
-	width: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-/* Login Error Box */
-
-.form-error {
-	border-radius: 25px;
-	border: 2px solid #e03a3a;
-	background: #f44542;
-	padding: 15px;
-	width: max-content;
-	height: max-content;
-	margin: 15px;
-	vertical-align: middle;
-}
-
-.form-error h3 {
-	color: black;
-	margin: 0;
-}
-
-.form-error text {
-	color: black;
+p.description {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Movie Info Page */
 
-.movieInfo {
-	float: left;
-	width: 40%;
-}
-
-.movieInfo tr {
-	text-align: left;
-}
-
-figcaption {
-	text-align: left;
-	font-weight: bold;
-	font-size: 14pt;
-}
-
 figure.moviePoster {
-	float: left;
-	width: auto;
-	margin: 0px;
-	margin-right: 10px;
-	padding: 0px;
+  margin: 0px;
+  margin-right: 10px;
+  padding: 0px;
 }
 
 figure.moviePoster img {
-	height: 400px;
+  height: 400px;
 }
 
-/* Footer */
-
-footer {
-	background-color: #f0f0f0;
-	position: fixed;
-	padding: 5px;
-	margin-top: 15px;
-	bottom: 0;
-	left: 0;
-	right: 0;
+figure.moviePoster figcaption {
+  font-weight: bold;
+  font-size: 14pt;
 }
 
-footer p {
-	margin-top: 0px;
-	margin-bottom: 0px;
+/* Form Error Box */
+
+.form-error {
+  border-radius: 25px;
+  border: 2px solid #e03a3a;
+  background: #f44542;
+  padding: 10px;
+  width: max-content;
+  height: max-content;
+  margin: 15px;
+  vertical-align: middle;
+}
+
+.form-error text {
+  color: black;
+}
+
+.form-error h3 {
+  color: black;
+  margin: 0;
 }

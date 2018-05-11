@@ -19,14 +19,14 @@
         <input type="submit" value="Search">
       </form>
 
-      {{#if user}}
-        <p>
-          <a href="/account" class="account">{{user.username}}</a> |
-          <a href="/logout">Not you? Logout.</a>
-        </p>
-      {{else}}
-        <a href="/login" class="account">Sign Up/Log In</a>
-      {{/if}}
+      <div class="accountLinks">
+        {{#if user}}
+            <a href="/account">{{user.username}}</a> |
+            <a href="/logout">Not you? Logout.</a>
+        {{else}}
+          <a href="/login" class="account">Sign Up/Log In</a>
+        {{/if}}
+      </div>
     </nav>
   </header>
 
